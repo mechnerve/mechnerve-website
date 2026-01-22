@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MechNerve Solutions</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>MechNerve Website is LIVE 🚀</h1>
-    <p>Flask + Render deployment successful.</p>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="MechNerve Logo">
+            <span>MechNerve</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Engineering Smarter Machines</h1>
+        <p>Mechanical + AI solutions for a smarter tomorrow</p>
+        <a href="/contact" class="btn">Contact Us</a>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="cards">
+            <div class="card">Mechanical Design</div>
+            <div class="card">Automation & Robotics</div>
+            <div class="card">AI Integration</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 MechNerve Solutions | Hyderabad, India</p>
+    </footer>
+
 </body>
 </html>
