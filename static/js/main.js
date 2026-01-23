@@ -93,45 +93,8 @@ function initContactForm() {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData.entries());
-        
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-        
-        try {
-            // Send to Flask API
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok && result.success) {
-                showNotification(result.message, 'success');
-                contactForm.reset();
-            } else {
-                throw new Error(result.message || 'Failed to send message');
-            }
-            
-        } catch (error) {
-            console.error('Error:', error);
-            showNotification(error.message || 'Failed to send message. Please email us directly at mechnervesolutions@gmail.com', 'error');
-        } finally {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    });
-}
         // Show loading state
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
