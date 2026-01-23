@@ -100,50 +100,46 @@
                 </div>
             </div>
             
-            <!-- Contact Form -->
-            <div class="fade-in" style="margin: 4rem 0;" id="contact-form">
-                <h2 style="font-size: 2.2rem; margin-bottom: 2rem;" class="text-gradient">Send Us a Message</h2>
-                
-                <form id="contactForm" style="background: rgba(30, 41, 59, 0.4); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(56, 189, 248, 0.2);">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Full Name *</label>
-                            <input type="text" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Email Address *</label>
-                            <input type="email" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Company Name</label>
-                        <input type="text" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Service Interest *</label>
-                        <select required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                            <option value="">Select a service</option>
-                            <option value="design">Mechanical Design</option>
-                            <option value="automation">Automation Solutions</option>
-                            <option value="ai">AI Integration</option>
-                            <option value="consulting">Consulting</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Project Description *</label>
-                        <textarea required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem; min-height: 150px;" placeholder="Tell us about your project, timeline, and specific requirements..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
-                        Send Message →
-                    </button>
-                </form>
-            </div>
+            <!-- In contact.html, update the form fields: -->
+<form id="contactForm">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div>
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Full Name *</label>
+            <input type="text" name="name" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+        </div>
+        
+        <div>
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Email Address *</label>
+            <input type="email" name="email" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+        </div>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Subject *</label>
+        <input type="text" name="subject" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;" placeholder="What would you like to discuss?">
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Service Interest</label>
+        <select name="service" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+            <option value="">Select a service</option>
+            <option value="Mechanical Design">Mechanical Design</option>
+            <option value="Automation Solutions">Automation Solutions</option>
+            <option value="AI Integration">AI Integration</option>
+            <option value="Consulting">Consulting</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Project Description *</label>
+        <textarea name="message" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem; min-height: 150px;" placeholder="Tell us about your project, timeline, and specific requirements..."></textarea>
+    </div>
+    
+    <button type="submit" class="btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+        Send Message →
+    </button>
+</form>
             
             <!-- Project Guidelines -->
             <div class="fade-in" style="margin: 4rem 0;">
