@@ -4,37 +4,44 @@
     <meta charset="UTF-8">
     <title>About | MechNerve</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="description" content="Learn about MechNerve Solutions - Technology-driven company in Mechanical Engineering and AI">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
 </head>
 <body>
+    <header>
+        <div class="logo-box">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
+            <span>MechNerve</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
 
-<header>
-    <div class="logo-box">
-        <img src="{{ url_for('static', filename='logo.png') }}">
-        <span>MechNerve</span>
-    </div>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-    </nav>
-</header>
+    <section class="page">
+        <h1>About Us</h1>
+        <p>
+            At <strong>MechNerve Solutions</strong>, we bridge the gap between mechanical engineering and artificial intelligence. Founded with a vision to revolutionize industrial automation, we combine decades of mechanical expertise with cutting-edge AI technologies.
+        </p>
+        <p>
+            Our team of engineers, data scientists, and AI specialists work together to create intelligent systems that learn, adapt, and optimize industrial processes in real-time.
+        </p>
+        <p>
+            <strong>Our Mission:</strong> To design and implement smart, efficient, and sustainable mechanical systems enhanced by artificial intelligence, driving innovation in manufacturing, automation, and industrial operations.
+        </p>
+        <p>
+            <strong>Our Vision:</strong> To become a global leader in AI-powered mechanical solutions, transforming how industries operate and paving the way for the factories of the future.
+        </p>
+        <p>
+            Based in Hyderabad, India's emerging tech hub, we serve clients across automotive, aerospace, manufacturing, and energy sectors, delivering solutions that increase efficiency, reduce costs, and enhance safety.
+        </p>
+    </section>
 
-<section class="page">
-    <h1>About Us</h1>
-    <p>
-        MechNerve Solutions is a technology-driven company focused on
-        Mechanical Engineering and Artificial Intelligence.
-    </p>
-    <p>
-        We design smart machines, automation systems, and AI-powered solutions
-        for modern industries.
-    </p>
-</section>
-
-<footer>
-    © 2026 MechNerve Solutions · Hyderabad, India
-</footer>
-
+    <footer>
+        © 2026 MechNerve Solutions · Hyderabad, India
+    </footer>
 </body>
 </html>
