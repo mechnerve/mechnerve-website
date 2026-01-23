@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>About | MechNerve</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<header class="navbar">
-    <div class="brand">MechNerve</div>
+<header>
+    <div class="logo-box">
+        <img src="{{ url_for('static', filename='logo.png') }}">
+        <span>MechNerve</span>
+    </div>
     <nav>
         <a href="/">Home</a>
+        <a href="/about">About</a>
         <a href="/contact">Contact</a>
     </nav>
 </header>
@@ -17,11 +23,18 @@
 <section class="page">
     <h1>About Us</h1>
     <p>
-        MechNerve Solutions delivers intelligent mechanical systems by
-        combining core engineering with modern AI technologies.
+        MechNerve Solutions is a technology-driven company focused on
+        Mechanical Engineering and Artificial Intelligence.
+    </p>
+    <p>
+        We design smart machines, automation systems, and AI-powered solutions
+        for modern industries.
     </p>
 </section>
 
+<footer>
+    © 2026 MechNerve Solutions · Hyderabad, India
+</footer>
+
 </body>
 </html>
-
