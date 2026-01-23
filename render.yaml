@@ -2,10 +2,16 @@ services:
   - type: web
     name: mechnerve-website
     env: python
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-    autoDeploy: true
-    healthCheckPath: /
+      - key: MAIL_USERNAME
+        sync: false  # Set this in Render dashboard
+      - key: MAIL_PASSWORD
+        sync: false  # Set this in Render dashboard
+      - key: MAIL_DEFAULT_SENDER
+        value: mechnervesolutions@gmail.com
+      - key: SECRET_KEY
+        generateValue: true
