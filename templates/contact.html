@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Contact | MechNerve</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<header class="navbar">
-    <div class="brand">MechNerve</div>
+<header>
+    <div class="logo-box">
+        <img src="{{ url_for('static', filename='logo.png') }}">
+        <span>MechNerve</span>
+    </div>
     <nav>
         <a href="/">Home</a>
         <a href="/about">About</a>
+        <a href="/contact">Contact</a>
     </nav>
 </header>
 
 <section class="page">
     <h1>Contact Us</h1>
 
-    <form method="POST" action="/send-message" class="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-
-    <p class="contact-info">
-        📧 mechnervesolutions@gmail.com<br>
-        📞 +91 7995961231<br>
-        📍 Hyderabad, Telangana, India
-    </p>
+    <p><strong>Email:</strong> mechnervesolutions@gmail.com</p>
+    <p><strong>Phone:</strong> +91 7995961231</p>
+    <p><strong>Location:</strong> Hyderabad, Telangana, India</p>
 </section>
+
+<footer>
+    © 2026 MechNerve Solutions · Hyderabad, India
+</footer>
 
 </body>
 </html>
-
