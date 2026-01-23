@@ -3,15 +3,9 @@ services:
     name: mechnerve-website
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      - key: MAIL_USERNAME
-        sync: false  # Set this in Render dashboard
-      - key: MAIL_PASSWORD
-        sync: false  # Set this in Render dashboard
-      - key: MAIL_DEFAULT_SENDER
-        value: mechnervesolutions@gmail.com
-      - key: SECRET_KEY
-        generateValue: true
+      - key: EMAIL_PASSWORD
+        sync: false  # Set this in Render dashboard if you want email
