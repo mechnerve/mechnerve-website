@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <title>MechNerve Solutions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
 <header class="navbar">
-    <div class="brand">
-        <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <div class="logo-area">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
         <span>MechNerve</span>
     </div>
+
     <nav>
         <a href="/">Home</a>
         <a href="/about">About</a>
@@ -21,21 +24,27 @@
 </header>
 
 <section class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Background logo -->
+    <img class="hero-bg-logo"
+         src="{{ url_for('static', filename='images/logo.png') }}"
+         alt="MechNerve Background Logo">
+
     <div class="hero-content">
         <h1>Engineering Smarter Machines</h1>
         <p>Mechanical + AI solutions for a smarter tomorrow</p>
-        <a href="/contact" class="btn">Contact Us</a>
+        <a class="btn" href="/contact">Contact Us</a>
     </div>
 </section>
 
 <section class="services">
     <h2>Our Services</h2>
-    <div class="cards">
-        <div class="card">Mechanical Design</div>
-        <div class="card">Automation & Robotics</div>
-        <div class="card">AI Integration</div>
-    </div>
+    <ul>
+        <li>Mechanical Design</li>
+        <li>Automation & Robotics</li>
+        <li>AI Integration</li>
+    </ul>
 </section>
 
 <footer>
