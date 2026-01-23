@@ -251,3 +251,52 @@ notificationStyles.textContent = `
     }
 `;
 document.head.appendChild(notificationStyles);
+// Team member hover effects enhancement
+document.addEventListener('DOMContentLoaded', function() {
+    // Team member cards animation
+    const teamMembers = document.querySelectorAll('.team-member');
+    teamMembers.forEach(member => {
+        member.addEventListener('mouseenter', () => {
+            const image = member.querySelector('.member-image img');
+            if (image) {
+                image.style.transform = 'scale(1.05)';
+            }
+        });
+        
+        member.addEventListener('mouseleave', () => {
+            const image = member.querySelector('.member-image img');
+            if (image) {
+                image.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    // Animate team stats on scroll
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                const finalValue = element.textContent;
+                const duration = 2000; // 2 seconds
+                const steps = 60;
+                const increment = parseInt(finalValue) / steps;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= parseInt(finalValue)) {
+                        element.textContent = finalValue;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current) + '+';
+                    }
+                }, duration / steps);
+                
+                observer.unobserve(element);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(stat => observer.observe(stat));
+});
