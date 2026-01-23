@@ -47,15 +47,19 @@
         <img class="page-bg-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="Background Logo">
         
         <div class="page-content-wrapper">
-            <h1 class="fade-in">About <span class="text-gradient">MechNerve Solutions</span></h1>
+            <h1 class="fade-in">Meet Our <span class="text-gradient">Expert Team</span></h1>
             
             <div class="fade-in" style="margin-bottom: 3rem;">
                 <p style="font-size: 1.2rem; color: var(--primary); font-weight: 500;">
-                    Pioneering the Future of Intelligent Mechanical Engineering
+                    The Minds Behind Intelligent Mechanical Innovation
+                </p>
+                <p style="color: var(--text-gray); margin-top: 1rem;">
+                    Our team combines decades of mechanical engineering expertise with cutting-edge AI knowledge 
+                    to deliver transformative solutions for modern industries.
                 </p>
             </div>
-            
-            <div class="fade-in" style="margin-bottom: 3rem;">
+
+           <div class="fade-in" style="margin-bottom: 3rem;">
                 <p>
                     Founded in 2020, <strong>MechNerve Solutions</strong> emerged from a vision to bridge the gap between 
                     traditional mechanical engineering and the transformative potential of artificial intelligence. 
@@ -86,85 +90,74 @@
             <!-- Team Stats -->
             <div class="team-stats fade-in">
                 <div class="stat-item">
+                    <span class="stat-icon">👥</span>
                     <div class="stat-number">25+</div>
                     <div class="stat-label">Expert Team Members</div>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-icon">🚀</span>
                     <div class="stat-number">50+</div>
                     <div class="stat-label">Projects Completed</div>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-icon">🏆</span>
                     <div class="stat-number">15+</div>
-                    <div class="stat-label">Industry Partners</div>
+                    <div class="stat-label">Industry Awards</div>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-icon">⭐</span>
                     <div class="stat-number">98%</div>
                     <div class="stat-label">Client Satisfaction</div>
                 </div>
             </div>
-            
-            <!-- Core Values -->
-            <div class="fade-in" style="margin: 4rem 0;">
-                <h2 style="font-size: 2.2rem; margin-bottom: 2rem;" class="text-gradient">Our Core Values</h2>
-                
-                <div class="features-grid">
-                    <div class="feature-card hover-lift">
-                        <h3>💡 Innovation</h3>
-                        <p>We constantly push boundaries, exploring new technologies and methodologies to stay ahead of industry trends and deliver breakthrough solutions.</p>
-                    </div>
-                    
-                    <div class="feature-card hover-lift">
-                        <h3>⚡ Precision</h3>
-                        <p>Every solution we deliver is built with meticulous attention to detail and engineering excellence, ensuring optimal performance and reliability.</p>
-                    </div>
-                    
-                    <div class="feature-card hover-lift">
-                        <h3>🌱 Sustainability</h3>
-                        <p>We design solutions that not only perform exceptionally but also contribute to a sustainable future through energy efficiency and resource optimization.</p>
-                    </div>
-                    
-                    <div class="feature-card hover-lift">
-                        <h3>🤝 Collaboration</h3>
-                        <p>We believe in working closely with our clients, understanding their unique challenges, and creating tailored solutions that drive their success.</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Leadership Team -->
-            <div class="team-section fade-in">
-                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;" class="text-gradient">Leadership Team</h2>
-                <p style="color: var(--text-gray); margin-bottom: 2rem;">Meet the visionaries leading our journey</p>
+            <div class="team-section leadership-team fade-in">
+                <div class="team-header">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;" class="text-gradient">Leadership Team</h2>
+                    <p style="color: var(--text-gray);">Visionaries driving our strategic direction and innovation</p>
+                </div>
                 
-                <div class="team-grid leadership-team">
-                    <!-- CEO -->
+                <div class="team-grid">
+                    <!-- Founder & CEO -->
                     <div class="team-member hover-lift">
                         <div class="member-image">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Rajesh Kumar">
+                            <img src="{{ url_for('static', filename='images/team/founder.jpg') }}" alt="Founder & CEO">
+                            <div class="member-badge">Founder & CEO</div>
+                            <div class="experience-badge">22+ Years Experience</div>
                         </div>
                         <div class="member-info">
-                            <h3 class="member-name">Dr. Rajesh Kumar</h3>
-                            <div class="member-designation">CEO & Founder</div>
+                            <h3 class="member-name">Dr. Arvind Sharma</h3>
+                            <div class="member-designation">Founder & Chief Executive Officer</div>
+                            
                             <div class="member-details">
-                                <p>20+ years experience in mechanical engineering and AI integration. Former Head of R&D at a Fortune 500 manufacturing company.</p>
-                                
+                                <p>Visionary leader with 22+ years in mechanical engineering and industrial automation. Former Director of Innovation at a global manufacturing conglomerate.</p>
+                            </div>
+                            
+                            <div class="education-section">
+                                <div class="education-title">Education</div>
                                 <ul class="education-list">
-                                    <li>Ph.D. in Mechanical Engineering - IIT Delhi</li>
-                                    <li>M.Tech in Robotics & Automation - MIT, USA</li>
-                                    <li>B.Tech in Mechanical Engineering - NIT Warangal</li>
+                                    <li>Ph.D. in Mechanical Engineering - Stanford University</li>
+                                    <li>M.S. in Robotics & Automation - MIT, USA</li>
+                                    <li>B.Tech in Mechanical Engineering - IIT Bombay</li>
+                                    <li>Executive Program in AI - Harvard Business School</li>
                                 </ul>
-                                
+                            </div>
+                            
+                            <div class="specialization-section">
+                                <div class="specialization-title">Expertise</div>
                                 <div class="specializations">
+                                    <span class="specialization-tag">Strategic Leadership</span>
+                                    <span class="specialization-tag">Industrial Automation</span>
                                     <span class="specialization-tag">AI Integration</span>
-                                    <span class="specialization-tag">Robotics</span>
-                                    <span class="specialization-tag">Industry 4.0</span>
-                                    <span class="specialization-tag">Smart Manufacturing</span>
+                                    <span class="specialization-tag">Business Development</span>
                                 </div>
-                                
-                                <div class="member-social">
-                                    <a href="#" class="social-icon">IN</a>
-                                    <a href="#" class="social-icon">✉️</a>
-                                    <a href="#" class="social-icon">📘</a>
-                                </div>
+                            </div>
+                            
+                            <div class="member-social">
+                                <a href="#" class="social-icon" title="LinkedIn">IN</a>
+                                <a href="#" class="social-icon" title="Email">✉️</a>
+                                <a href="#" class="social-icon" title="Twitter">🐦</a>
                             </div>
                         </div>
                     </div>
@@ -172,71 +165,195 @@
                     <!-- CTO -->
                     <div class="team-member hover-lift">
                         <div class="member-image">
-                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Priya Sharma">
+                            <img src="{{ url_for('static', filename='images/team/ceo.jpg') }}" alt="Chief Technology Officer">
+                            <div class="member-badge">CTO</div>
+                            <div class="experience-badge">18+ Years Experience</div>
                         </div>
                         <div class="member-info">
-                            <h3 class="member-name">Dr. Priya Sharma</h3>
+                            <h3 class="member-name">Priya Verma</h3>
                             <div class="member-designation">Chief Technology Officer</div>
+                            
                             <div class="member-details">
-                                <p>15+ years in AI/ML research with focus on industrial applications. Published 30+ research papers in international journals.</p>
-                                
+                                <p>Technology innovator with 18+ years in AI/ML research and implementation. Leads our R&D division and technology strategy.</p>
+                            </div>
+                            
+                            <div class="education-section">
+                                <div class="education-title">Education</div>
                                 <ul class="education-list">
-                                    <li>Ph.D. in Artificial Intelligence - Stanford University</li>
-                                    <li>M.S. in Computer Science - Carnegie Mellon</li>
-                                    <li>B.Tech in Computer Science - IIT Bombay</li>
+                                    <li>Ph.D. in Artificial Intelligence - Carnegie Mellon University</li>
+                                    <li>M.S. in Computer Science - University of California, Berkeley</li>
+                                    <li>B.Tech in Computer Science - IIT Delhi</li>
+                                    <li>Certified Machine Learning Engineer - Google</li>
                                 </ul>
-                                
+                            </div>
+                            
+                            <div class="specialization-section">
+                                <div class="specialization-title">Expertise</div>
                                 <div class="specializations">
                                     <span class="specialization-tag">Machine Learning</span>
                                     <span class="specialization-tag">Computer Vision</span>
-                                    <span class="specialization-tag">Predictive Analytics</span>
                                     <span class="specialization-tag">Neural Networks</span>
+                                    <span class="specialization-tag">R&D Management</span>
                                 </div>
-                                
-                                <div class="member-social">
-                                    <a href="#" class="social-icon">IN</a>
-                                    <a href="#" class="social-icon">✉️</a>
-                                    <a href="#" class="social-icon">📘</a>
-                                </div>
+                            </div>
+                            
+                            <div class="member-social">
+                                <a href="#" class="social-icon" title="LinkedIn">IN</a>
+                                <a href="#" class="social-icon" title="GitHub">🐙</a>
+                                <a href="#" class="social-icon" title="Research">📚</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Technical Team -->
-            <div class="team-section fade-in">
-                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;" class="text-gradient">Technical Experts</h2>
-                <p style="color: var(--text-gray); margin-bottom: 2rem;">Our specialized engineering and AI team</p>
+            <!-- Mechanical Engineering Team -->
+            <div class="team-section tech-team fade-in">
+                <div class="team-header">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;" class="text-gradient">Mechanical Engineering Team</h2>
+                    <p style="color: var(--text-gray);">Experts in design, analysis, and implementation</p>
+                </div>
                 
-                <div class="team-grid tech-team">
-                    <!-- Mechanical Engineer -->
+                <div class="team-grid">
+                    <!-- Senior Mechanical Engineer 1 -->
                     <div class="team-member hover-lift">
                         <div class="member-image">
-                            <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Arjun Patel">
+                            <img src="{{ url_for('static', filename='images/team/engineer1.jpg') }}" alt="Senior Mechanical Engineer">
+                            <div class="member-badge">Lead Engineer</div>
+                            <div class="experience-badge">15+ Years Experience</div>
                         </div>
                         <div class="member-info">
-                            <h3 class="member-name">Arjun Patel</h3>
+                            <h3 class="member-name">Rahul Mehta</h3>
                             <div class="member-designation">Senior Mechanical Engineer</div>
+                            
                             <div class="member-details">
-                                <p>12+ years experience in mechanical design and automation. Specialist in CAD/CAM and industrial equipment design.</p>
-                                
+                                <p>Specialist in industrial equipment design and CAD/CAM systems. Has led 30+ successful mechanical design projects.</p>
+                            </div>
+                            
+                            <div class="education-section">
+                                <div class="education-title">Education & Certifications</div>
                                 <ul class="education-list">
                                     <li>M.Tech in Mechanical Design - IIT Madras</li>
                                     <li>B.Tech in Mechanical Engineering - NIT Surathkal</li>
-                                    <li>Certified SolidWorks Professional</li>
+                                    <li>Certified SolidWorks Expert (CSWE)</li>
+                                    <li>Autodesk Certified Professional</li>
+                                    <li>Six Sigma Green Belt Certified</li>
                                 </ul>
-                                
+                            </div>
+                            
+                            <div class="specialization-section">
+                                <div class="specialization-title">Technical Skills</div>
                                 <div class="specializations">
                                     <span class="specialization-tag">CAD/CAM</span>
                                     <span class="specialization-tag">FEA Analysis</span>
                                     <span class="specialization-tag">Thermal Systems</span>
+                                    <span class="specialization-tag">Hydraulics</span>
+                                    <span class="specialization-tag">Prototyping</span>
                                 </div>
-                                
-                                <div class="member-social">
-                                    <a href="#" class="social-icon">IN</a>
-                                    <a href="#" class="social-icon">📘</a>
+                            </div>
+                            
+                            <div class="member-social">
+                                <a href="#" class="social-icon" title="LinkedIn">IN</a>
+                                <a href="#" class="social-icon" title="Portfolio">📁</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mechanical Engineer 2 -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="{{ url_for('static', filename='images/team/engineer2.jpg') }}" alt="Mechanical Engineer">
+                            <div class="member-badge">Design Specialist</div>
+                            <div class="experience-badge">10+ Years Experience</div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Anjali Reddy</h3>
+                            <div class="member-designation">Mechanical Design Engineer</div>
+                            
+                            <div class="member-details">
+                                <p>Expert in 3D modeling, simulation, and prototyping. Focuses on sustainable and efficient mechanical designs.</p>
+                            </div>
+                            
+                            <div class="education-section">
+                                <div class="education-title">Education & Certifications</div>
+                                <ul class="education-list">
+                                    <li>M.S. in Mechanical Engineering - University of Michigan</li>
+                                    <li>B.Tech in Mechanical Engineering - VIT Vellore</li>
+                                    <li>ANSYS Certified Professional</li>
+                                    <li>Autodesk Fusion 360 Certified</li>
+                                    <li>LEAN Manufacturing Certified</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="specialization-section">
+                                <div class="specialization-title">Technical Skills</div>
+                                <div class="specializations">
+                                    <span class="specialization-tag">3D Modeling</span>
+                                    <span class="specialization-tag">Simulation</span>
+                                    <span class="specialization-tag">Prototyping</span>
+                                    <span class="specialization-tag">DFM/DFA</span>
+                                    <span class="specialization-tag">Sustainability</span>
                                 </div>
+                            </div>
+                            
+                            <div class="member-social">
+                                <a href="#" class="social-icon" title="LinkedIn">IN</a>
+                                <a href="#" class="social-icon" title="Behance">🅱️</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & Automation Team -->
+            <div class="team-section ai-team fade-in">
+                <div class="team-header">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;" class="text-gradient">AI & Automation Team</h2>
+                    <p style="color: var(--text-gray);">Specialists in intelligent systems and robotics</p>
+                </div>
+                
+                <div class="team-grid">
+                    <!-- AI Specialist -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="{{ url_for('static', filename='images/team/ai-specialist.jpg') }}" alt="AI Specialist">
+                            <div class="member-badge">AI Lead</div>
+                            <div class="experience-badge">12+ Years Experience</div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Karthik Nair</h3>
+                            <div class="member-designation">AI/ML Specialist</div>
+                            
+                            <div class="member-details">
+                                <p>Expert in implementing machine learning models for industrial applications, focusing on predictive maintenance and quality control.</p>
+                            </div>
+                            
+                            <div class="education-section">
+                                <div class="education-title">Education & Certifications</div>
+                                <ul class="education-list">
+                                    <li>M.S. in Data Science - University of Washington</li>
+                                    <li>B.Tech in Computer Science - BITS Pilani</li>
+                                    <li>Google Professional ML Engineer</li>
+                                    <li>AWS Certified Machine Learning Specialist</li>
+                                    <li>TensorFlow Developer Certificate</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="specialization-section">
+                                <div class="specialization-title">Technical Skills</div>
+                                <div class="specializations">
+                                    <span class="specialization-tag">Deep Learning</span>
+                                    <span class="specialization-tag">Predictive Analytics</span>
+                                    <span class="specialization-tag">TensorFlow</span>
+                                    <span class="specialization-tag">PyTorch</span>
+                                    <span class="specialization-tag">Computer Vision</span>
+                                </div>
+                            </div>
+                            
+                            <div class="member-social">
+                                <a href="#" class="social-icon" title="LinkedIn">IN</a>
+                                <a href="#" class="social-icon" title="GitHub">🐙</a>
+                                <a href="#" class="social-icon" title="Kaggle">🏆</a>
                             </div>
                         </div>
                     </div>
@@ -244,116 +361,96 @@
                     <!-- Robotics Engineer -->
                     <div class="team-member hover-lift">
                         <div class="member-image">
-                            <img src="https://images.unsplash.com/photo-1506919258185-6078bba55d2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sneha Reddy">
+                            <img src="{{ url_for('static', filename='images/team/robotics-engineer.jpg') }}" alt="Robotics Engineer">
+                            <div class="member-badge">Automation Lead</div>
+                            <div class="experience-badge">14+ Years Experience</div>
                         </div>
                         <div class="member-info">
-                            <h3 class="member-name">Sneha Reddy</h3>
-                            <div class="member-designation">Robotics & Automation Lead</div>
+                            <h3 class="member-name">Vikram Singh</h3>
+                            <div class="member-designation">Robotics & Automation Engineer</div>
+                            
                             <div class="member-details">
-                                <p>8+ years in industrial robotics and automation. Implemented 50+ robotic systems across manufacturing facilities.</p>
-                                
+                                <p>Specialist in industrial robotics, PLC programming, and automated systems integration. Has deployed 50+ robotic systems.</p>
+                            </div>
+                            
+                            <div class="education-section">
+                                <div class="education-title">Education & Certifications</div>
                                 <ul class="education-list">
-                                    <li>M.S. in Robotics - University of Tokyo</li>
-                                    <li>B.Tech in Electronics & Communication - VIT Vellore</li>
+                                    <li>M.S. in Robotics - ETH Zurich</li>
+                                    <li>B.Tech in Electronics Engineering - NIT Trichy</li>
                                     <li>Certified Robotics Engineer (CRE)</li>
+                                    <li>SIEMENS PLC Certified</li>
+                                    <li>FANUC Robot Programming Certified</li>
                                 </ul>
-                                
+                            </div>
+                            
+                            <div class="specialization-section">
+                                <div class="specialization-title">Technical Skills</div>
                                 <div class="specializations">
                                     <span class="specialization-tag">Industrial Robotics</span>
                                     <span class="specialization-tag">PLC Programming</span>
                                     <span class="specialization-tag">Automation</span>
-                                </div>
-                                
-                                <div class="member-social">
-                                    <a href="#" class="social-icon">IN</a>
-                                    <a href="#" class="social-icon">📘</a>
+                                    <span class="specialization-tag">IoT Systems</span>
+                                    <span class="specialization-tag">Motion Control</span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <!-- AI Specialist -->
-                    <div class="team-member hover-lift">
-                        <div class="member-image">
-                            <img src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Karthik Menon">
-                        </div>
-                        <div class="member-info">
-                            <h3 class="member-name">Karthik Menon</h3>
-                            <div class="member-designation">AI/ML Specialist</div>
-                            <div class="member-details">
-                                <p>Expert in implementing ML models for industrial applications. Focus on predictive maintenance and quality control.</p>
-                                
-                                <ul class="education-list">
-                                    <li>M.S. in Data Science - University of Michigan</li>
-                                    <li>B.Tech in Computer Science - BITS Pilani</li>
-                                    <li>Google Professional ML Engineer</li>
-                                </ul>
-                                
-                                <div class="specializations">
-                                    <span class="specialization-tag">Deep Learning</span>
-                                    <span class="specialization-tag">Predictive Analytics</span>
-                                    <span class="specialization-tag">TensorFlow</span>
-                                </div>
-                                
-                                <div class="member-social">
-                                    <a href="#" class="social-icon">IN</a>
-                                    <a href="#" class="social-icon">📘</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- IoT Engineer -->
-                    <div class="team-member hover-lift">
-                        <div class="member-image">
-                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vikram Singh">
-                        </div>
-                        <div class="member-info">
-                            <h3 class="member-name">Vikram Singh</h3>
-                            <div class="member-designation">IoT & Embedded Systems Engineer</div>
-                            <div class="member-details">
-                                <p>Specialist in industrial IoT systems and sensor networks. Designed 30+ IoT solutions for smart manufacturing.</p>
-                                
-                                <ul class="education-list">
-                                    <li>M.Tech in Embedded Systems - IIIT Hyderabad</li>
-                                    <li>B.Tech in Electronics - NIT Trichy</li>
-                                    <li>Certified IoT Professional</li>
-                                </ul>
-                                
-                                <div class="specializations">
-                                    <span class="specialization-tag">IoT Architecture</span>
-                                    <span class="specialization-tag">Sensor Networks</span>
-                                    <span class="specialization-tag">Edge Computing</span>
-                                </div>
-                                
-                                <div class="member-social">
-                                    <a href="#" class="social-icon">IN</a>
-                                    <a href="#" class="social-icon">📘</a>
-                                </div>
+                            
+                            <div class="member-social">
+                                <a href="#" class="social-icon" title="LinkedIn">IN</a>
+                                <a href="#" class="social-icon" title="ResearchGate">🔬</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Location -->
-            <div class="fade-in" style="margin-top: 4rem; padding: 2rem; background: rgba(56, 189, 248, 0.05); border-radius: 15px; border-left: 4px solid var(--primary);">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">📍 Our Location</h3>
-                <p>
-                    Based in <strong>Hyderabad, India</strong> – the nation's emerging tech hub – we serve clients across 
-                    automotive, aerospace, manufacturing, and energy sectors. Our strategic location allows us to 
-                    leverage India's growing technological ecosystem while maintaining global standards of excellence.
-                </p>
-                <p style="margin-top: 1rem;">
-                    From our Hyderabad headquarters, we deliver solutions that increase efficiency, reduce costs, 
-                    and enhance safety for industries worldwide, driving the next generation of industrial innovation.
-                </p>
+
+            <!-- Core Values -->
+            <div class="fade-in" style="margin: 4rem 0;">
+                <div class="team-header">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;" class="text-gradient">Our Core Values</h2>
+                    <p style="color: var(--text-gray); max-width: 800px; margin: 0 auto;">Principles that guide every solution we deliver</p>
+                </div>
+                
+                <div class="features-grid" style="margin-top: 2rem;">
+                    <div class="feature-card hover-lift">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.5rem;">💡</span> Innovation
+                        </h3>
+                        <p>We constantly push boundaries, exploring new technologies and methodologies to stay ahead of industry trends and deliver breakthrough solutions.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-lift">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.5rem;">⚡</span> Precision
+                        </h3>
+                        <p>Every solution we deliver is built with meticulous attention to detail and engineering excellence, ensuring optimal performance and reliability.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-lift">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.5rem;">🌱</span> Sustainability
+                        </h3>
+                        <p>We design solutions that not only perform exceptionally but also contribute to a sustainable future through energy efficiency and resource optimization.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-lift">
+                        <h3 style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.5rem;">🤝</span> Collaboration
+                        </h3>
+                        <p>We believe in working closely with our clients, understanding their unique challenges, and creating tailored solutions that drive their success.</p>
+                    </div>
+                </div>
             </div>
             
-            <!-- CTA -->
-            <div class="fade-in" style="text-align: center; margin-top: 4rem;">
-                <a href="/contact" class="btn" style="padding: 1rem 3rem; font-size: 1.1rem;">
-                    Partner With Us →
+            <!-- Join Team CTA -->
+            <div class="fade-in" style="text-align: center; padding: 4rem; background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(244, 114, 182, 0.1)); border-radius: 15px; margin: 4rem 0;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;" class="text-gradient">Join Our Growing Team</h3>
+                <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                    We're always looking for talented engineers, AI specialists, and innovators who are passionate about 
+                    transforming industries through intelligent mechanical solutions.
+                </p>
+                <a href="mailto:careers@mechnervesolutions.com" class="btn" style="padding: 1rem 3rem; font-size: 1.1rem;">
+                    Explore Careers →
                 </a>
             </div>
         </div>
