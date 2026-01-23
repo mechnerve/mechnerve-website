@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About | MechNerve Solutions</title>
+    <title>About Us | MechNerve Solutions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn about MechNerve Solutions - Pioneering AI-powered mechanical engineering solutions since 2020">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -20,193 +20,384 @@
         </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <!-- Particle Background -->
-    <div class="particles"></div>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
 
     <!-- Header -->
     <header>
-        <div class="nav-container">
+        <div class="navbar">
             <div class="logo-area">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
-                <span class="logo-text">MechNerve</span>
+                <span>MechNerve</span>
             </div>
             
-            <nav class="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/about" class="nav-link active">About</a>
-                <a href="/contact" class="nav-link">Contact</a>
-                <a href="/contact" class="cta-button">Get Started</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/contact" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Get Started</a>
             </nav>
             
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
         </div>
     </header>
 
     <!-- About Section -->
-    <section class="about">
-        <div class="glow" style="top: 30%; right: 15%;"></div>
+    <section class="page">
+        <img class="page-bg-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="Background Logo">
         
-        <div class="about-content">
-            <div class="about-text fade-in">
-                <h2 class="about-title">Pioneering <span class="highlight">Intelligent</span> Mechanical Solutions</h2>
-                <p>Founded in 2020, MechNerve Solutions emerged from a simple yet powerful vision: to bridge the gap between traditional mechanical engineering and the transformative potential of artificial intelligence.</p>
-                <p>Our journey began with a team of passionate engineers and AI specialists who recognized that the future of industrial innovation lies in the seamless integration of these two disciplines.</p>
-                <p>Today, we stand at the forefront of Industry 4.0, delivering cutting-edge solutions that transform how industries operate, optimize, and innovate.</p>
+        <div class="page-content-wrapper">
+            <h1 class="fade-in">About <span class="text-gradient">MechNerve Solutions</span></h1>
+            
+            <div class="fade-in" style="margin-bottom: 3rem;">
+                <p style="font-size: 1.2rem; color: var(--primary); font-weight: 500;">
+                    Pioneering the Future of Intelligent Mechanical Engineering
+                </p>
+            </div>
+            
+            <div class="fade-in" style="margin-bottom: 3rem;">
+                <p>
+                    Founded in 2020, <strong>MechNerve Solutions</strong> emerged from a vision to bridge the gap between 
+                    traditional mechanical engineering and the transformative potential of artificial intelligence. 
+                    We recognized that the future of industrial innovation lies in the seamless integration of these two disciplines.
+                </p>
                 
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Projects Completed</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Industry Partners</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Client Satisfaction</div>
-                    </div>
-                </div>
+                <p>
+                    Today, we stand at the forefront of Industry 4.0, delivering cutting-edge solutions that 
+                    transform how industries operate, optimize, and innovate. Our team of passionate engineers, 
+                    data scientists, and AI specialists work collaboratively to create intelligent systems that 
+                    learn, adapt, and optimize industrial processes in real-time.
+                </p>
             </div>
             
-            <div class="about-visual fade-in">
-                <!-- Add visual elements or keep as is -->
-                <div class="floating-element">
-                    <svg viewBox="0 0 100 100" width="60" height="60">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="2"/>
-                        <path d="M30,50 Q50,30 70,50" stroke="var(--secondary)" stroke-width="2" fill="none"/>
-                    </svg>
+            <!-- Mission & Vision -->
+            <div class="features-grid fade-in">
+                <div class="feature-card hover-lift">
+                    <h3>🎯 Our Mission</h3>
+                    <p>To design and implement smart, efficient, and sustainable mechanical systems enhanced by artificial intelligence, driving innovation in manufacturing and industrial operations worldwide.</p>
                 </div>
-                <div class="floating-element">
-                    <svg viewBox="0 0 100 100" width="80" height="80">
-                        <polygon points="50,10 90,90 10,90" fill="none" stroke="var(--accent)" stroke-width="2"/>
-                    </svg>
-                </div>
-                <div class="floating-element">
-                    <svg viewBox="0 0 100 100" width="70" height="70">
-                        <rect x="20" y="20" width="60" height="60" fill="none" stroke="var(--primary)" stroke-width="2"/>
-                        <circle cx="50" cy="50" r="15" fill="none" stroke="var(--secondary)" stroke-width="2"/>
-                    </svg>
+                
+                <div class="feature-card hover-lift">
+                    <h3>🚀 Our Vision</h3>
+                    <p>To become a global leader in AI-powered mechanical solutions, transforming how industries operate and paving the way for the factories of the future through continuous innovation.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Values Section -->
-    <section class="services">
-        <div class="section-header">
-            <h2 class="section-title">Our Core Values</h2>
-            <p class="section-subtitle">The principles that guide everything we do</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
+            <!-- Team Stats -->
+            <div class="team-stats fade-in">
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Expert Team Members</div>
                 </div>
-                <h3>Innovation</h3>
-                <p>We constantly push boundaries, exploring new technologies and methodologies to stay ahead of industry trends.</p>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Industry Partners</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
             </div>
             
-            <div class="service-card fade-in" style="transition-delay: 0.1s;">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+            <!-- Core Values -->
+            <div class="fade-in" style="margin: 4rem 0;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 2rem;" class="text-gradient">Our Core Values</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card hover-lift">
+                        <h3>💡 Innovation</h3>
+                        <p>We constantly push boundaries, exploring new technologies and methodologies to stay ahead of industry trends and deliver breakthrough solutions.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-lift">
+                        <h3>⚡ Precision</h3>
+                        <p>Every solution we deliver is built with meticulous attention to detail and engineering excellence, ensuring optimal performance and reliability.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-lift">
+                        <h3>🌱 Sustainability</h3>
+                        <p>We design solutions that not only perform exceptionally but also contribute to a sustainable future through energy efficiency and resource optimization.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-lift">
+                        <h3>🤝 Collaboration</h3>
+                        <p>We believe in working closely with our clients, understanding their unique challenges, and creating tailored solutions that drive their success.</p>
+                    </div>
                 </div>
-                <h3>Precision</h3>
-                <p>Every solution we deliver is built with meticulous attention to detail and engineering excellence.</p>
             </div>
-            
-            <div class="service-card fade-in" style="transition-delay: 0.2s;">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                </div>
-                <h3>Sustainability</h3>
-                <p>We design solutions that not only perform exceptionally but also contribute to a sustainable future.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Team Section -->
-    <section class="services" style="background: var(--darker-bg);">
-        <div class="section-header">
-            <h2 class="section-title">Our Expertise</h2>
-            <p class="section-subtitle">A multidisciplinary team of industry experts</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <h3>Mechanical Engineers</h3>
-                <p>Seasoned professionals with expertise in design, analysis, and implementation of complex mechanical systems.</p>
+            <!-- Leadership Team -->
+            <div class="team-section fade-in">
+                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;" class="text-gradient">Leadership Team</h2>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">Meet the visionaries leading our journey</p>
+                
+                <div class="team-grid leadership-team">
+                    <!-- CEO -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Rajesh Kumar">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Dr. Rajesh Kumar</h3>
+                            <div class="member-designation">CEO & Founder</div>
+                            <div class="member-details">
+                                <p>20+ years experience in mechanical engineering and AI integration. Former Head of R&D at a Fortune 500 manufacturing company.</p>
+                                
+                                <ul class="education-list">
+                                    <li>Ph.D. in Mechanical Engineering - IIT Delhi</li>
+                                    <li>M.Tech in Robotics & Automation - MIT, USA</li>
+                                    <li>B.Tech in Mechanical Engineering - NIT Warangal</li>
+                                </ul>
+                                
+                                <div class="specializations">
+                                    <span class="specialization-tag">AI Integration</span>
+                                    <span class="specialization-tag">Robotics</span>
+                                    <span class="specialization-tag">Industry 4.0</span>
+                                    <span class="specialization-tag">Smart Manufacturing</span>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="#" class="social-icon">IN</a>
+                                    <a href="#" class="social-icon">✉️</a>
+                                    <a href="#" class="social-icon">📘</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTO -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dr. Priya Sharma">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Dr. Priya Sharma</h3>
+                            <div class="member-designation">Chief Technology Officer</div>
+                            <div class="member-details">
+                                <p>15+ years in AI/ML research with focus on industrial applications. Published 30+ research papers in international journals.</p>
+                                
+                                <ul class="education-list">
+                                    <li>Ph.D. in Artificial Intelligence - Stanford University</li>
+                                    <li>M.S. in Computer Science - Carnegie Mellon</li>
+                                    <li>B.Tech in Computer Science - IIT Bombay</li>
+                                </ul>
+                                
+                                <div class="specializations">
+                                    <span class="specialization-tag">Machine Learning</span>
+                                    <span class="specialization-tag">Computer Vision</span>
+                                    <span class="specialization-tag">Predictive Analytics</span>
+                                    <span class="specialization-tag">Neural Networks</span>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="#" class="social-icon">IN</a>
+                                    <a href="#" class="social-icon">✉️</a>
+                                    <a href="#" class="social-icon">📘</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Team -->
+            <div class="team-section fade-in">
+                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;" class="text-gradient">Technical Experts</h2>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">Our specialized engineering and AI team</p>
+                
+                <div class="team-grid tech-team">
+                    <!-- Mechanical Engineer -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Arjun Patel">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Arjun Patel</h3>
+                            <div class="member-designation">Senior Mechanical Engineer</div>
+                            <div class="member-details">
+                                <p>12+ years experience in mechanical design and automation. Specialist in CAD/CAM and industrial equipment design.</p>
+                                
+                                <ul class="education-list">
+                                    <li>M.Tech in Mechanical Design - IIT Madras</li>
+                                    <li>B.Tech in Mechanical Engineering - NIT Surathkal</li>
+                                    <li>Certified SolidWorks Professional</li>
+                                </ul>
+                                
+                                <div class="specializations">
+                                    <span class="specialization-tag">CAD/CAM</span>
+                                    <span class="specialization-tag">FEA Analysis</span>
+                                    <span class="specialization-tag">Thermal Systems</span>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="#" class="social-icon">IN</a>
+                                    <a href="#" class="social-icon">📘</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Robotics Engineer -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1506919258185-6078bba55d2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sneha Reddy">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Sneha Reddy</h3>
+                            <div class="member-designation">Robotics & Automation Lead</div>
+                            <div class="member-details">
+                                <p>8+ years in industrial robotics and automation. Implemented 50+ robotic systems across manufacturing facilities.</p>
+                                
+                                <ul class="education-list">
+                                    <li>M.S. in Robotics - University of Tokyo</li>
+                                    <li>B.Tech in Electronics & Communication - VIT Vellore</li>
+                                    <li>Certified Robotics Engineer (CRE)</li>
+                                </ul>
+                                
+                                <div class="specializations">
+                                    <span class="specialization-tag">Industrial Robotics</span>
+                                    <span class="specialization-tag">PLC Programming</span>
+                                    <span class="specialization-tag">Automation</span>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="#" class="social-icon">IN</a>
+                                    <a href="#" class="social-icon">📘</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Specialist -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Karthik Menon">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Karthik Menon</h3>
+                            <div class="member-designation">AI/ML Specialist</div>
+                            <div class="member-details">
+                                <p>Expert in implementing ML models for industrial applications. Focus on predictive maintenance and quality control.</p>
+                                
+                                <ul class="education-list">
+                                    <li>M.S. in Data Science - University of Michigan</li>
+                                    <li>B.Tech in Computer Science - BITS Pilani</li>
+                                    <li>Google Professional ML Engineer</li>
+                                </ul>
+                                
+                                <div class="specializations">
+                                    <span class="specialization-tag">Deep Learning</span>
+                                    <span class="specialization-tag">Predictive Analytics</span>
+                                    <span class="specialization-tag">TensorFlow</span>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="#" class="social-icon">IN</a>
+                                    <a href="#" class="social-icon">📘</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- IoT Engineer -->
+                    <div class="team-member hover-lift">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vikram Singh">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">Vikram Singh</h3>
+                            <div class="member-designation">IoT & Embedded Systems Engineer</div>
+                            <div class="member-details">
+                                <p>Specialist in industrial IoT systems and sensor networks. Designed 30+ IoT solutions for smart manufacturing.</p>
+                                
+                                <ul class="education-list">
+                                    <li>M.Tech in Embedded Systems - IIIT Hyderabad</li>
+                                    <li>B.Tech in Electronics - NIT Trichy</li>
+                                    <li>Certified IoT Professional</li>
+                                </ul>
+                                
+                                <div class="specializations">
+                                    <span class="specialization-tag">IoT Architecture</span>
+                                    <span class="specialization-tag">Sensor Networks</span>
+                                    <span class="specialization-tag">Edge Computing</span>
+                                </div>
+                                
+                                <div class="member-social">
+                                    <a href="#" class="social-icon">IN</a>
+                                    <a href="#" class="social-icon">📘</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="service-card fade-in" style="transition-delay: 0.1s;">
-                <h3>AI Specialists</h3>
-                <p>Experts in machine learning, computer vision, and predictive analytics applied to industrial problems.</p>
+            <!-- Location -->
+            <div class="fade-in" style="margin-top: 4rem; padding: 2rem; background: rgba(56, 189, 248, 0.05); border-radius: 15px; border-left: 4px solid var(--primary);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📍 Our Location</h3>
+                <p>
+                    Based in <strong>Hyderabad, India</strong> – the nation's emerging tech hub – we serve clients across 
+                    automotive, aerospace, manufacturing, and energy sectors. Our strategic location allows us to 
+                    leverage India's growing technological ecosystem while maintaining global standards of excellence.
+                </p>
+                <p style="margin-top: 1rem;">
+                    From our Hyderabad headquarters, we deliver solutions that increase efficiency, reduce costs, 
+                    and enhance safety for industries worldwide, driving the next generation of industrial innovation.
+                </p>
             </div>
             
-            <div class="service-card fade-in" style="transition-delay: 0.2s;">
-                <h3>Robotics Engineers</h3>
-                <p>Specialists in automation, robotic systems, and industrial IoT implementation.</p>
+            <!-- CTA -->
+            <div class="fade-in" style="text-align: center; margin-top: 4rem;">
+                <a href="/contact" class="btn" style="padding: 1rem 3rem; font-size: 1.1rem;">
+                    Partner With Us →
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-logo">MechNerve</div>
-                <p class="footer-text">Engineering smarter machines through the fusion of mechanical engineering and artificial intelligence.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link">F</a>
-                    <a href="#" class="social-link">T</a>
-                    <a href="#" class="social-link">IN</a>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="height: 30px;">
+                        <span style="font-size: 1.3rem; font-weight: bold;" class="text-gradient">MechNerve</span>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        Pioneering intelligent mechanical solutions through AI integration and innovation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">Quick Links</h4>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="/" style="color: var(--text-gray); text-decoration: none; transition: var(--transition-fast);">Home</a>
+                        <a href="/about" style="color: var(--text-gray); text-decoration: none; transition: var(--transition-fast);">About Us</a>
+                        <a href="#services" style="color: var(--text-gray); text-decoration: none; transition: var(--transition-fast);">Services</a>
+                        <a href="/contact" style="color: var(--text-gray); text-decoration: none; transition: var(--transition-fast);">Contact</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="color: white; margin-bottom: 1rem;">Contact Info</h4>
+                    <div style="color: var(--text-gray); font-size: 0.9rem;">
+                        <p>Hyderabad, India</p>
+                        <p>mechnervesolutions@gmail.com</p>
+                        <p>+91 7995961231</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
+            <div style="border-top: 1px solid rgba(56, 189, 248, 0.1); padding-top: 1.5rem;">
+                <p style="color: var(--text-gray); font-size: 0.85rem;">
+                    © 2026 MechNerve Solutions. All rights reserved.
+                </p>
             </div>
-            
-            <div class="footer-section">
-                <h4>Services</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Mechanical Design</a></li>
-                    <li><a href="#">Automation</a></li>
-                    <li><a href="#">AI Integration</a></li>
-                    <li><a href="#">Consulting</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <ul class="footer-links">
-                    <li>Hyderabad, India</li>
-                    <li>mechnervesolutions@gmail.com</li>
-                    <li>+91 7995961231</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            © 2026 MechNerve Solutions. All rights reserved.
         </div>
     </footer>
 </body>
