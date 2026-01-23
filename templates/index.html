@@ -4,52 +4,47 @@
     <meta charset="UTF-8">
     <title>MechNerve Solutions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- CSS -->
+    <meta name="description" content="Engineering smarter machines with Mechanical and AI solutions">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
+            <span>MechNerve</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
 
-<header class="navbar">
-    <div class="logo-area">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
-        <span>MechNerve</span>
-    </div>
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <img class="hero-bg-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Background Logo">
+        <div class="hero-content">
+            <h1>Engineering Smarter Machines</h1>
+            <p>Mechanical + AI solutions for a smarter tomorrow</p>
+            <a class="btn" href="/contact">Contact Us</a>
+        </div>
+    </section>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-    </nav>
-</header>
+    <section class="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Mechanical Design & Prototyping</li>
+            <li>Automation & Robotics Solutions</li>
+            <li>AI Integration & Machine Learning</li>
+            <li>Industrial IoT Systems</li>
+            <li>Smart Manufacturing Solutions</li>
+            <li>Predictive Maintenance Systems</li>
+        </ul>
+    </section>
 
-<section class="hero">
-    <div class="hero-overlay"></div>
-
-    <!-- Background logo -->
-    <img class="hero-bg-logo"
-         src="{{ url_for('static', filename='images/logo.png') }}"
-         alt="MechNerve Background Logo">
-
-    <div class="hero-content">
-        <h1>Engineering Smarter Machines</h1>
-        <p>Mechanical + AI solutions for a smarter tomorrow</p>
-        <a class="btn" href="/contact">Contact Us</a>
-    </div>
-</section>
-
-<section class="services">
-    <h2>Our Services</h2>
-    <ul>
-        <li>Mechanical Design</li>
-        <li>Automation & Robotics</li>
-        <li>AI Integration</li>
-    </ul>
-</section>
-
-<footer>
-    © 2026 MechNerve Solutions · Hyderabad, India
-</footer>
-
+    <footer>
+        © 2026 MechNerve Solutions · Hyderabad, India
+    </footer>
 </body>
 </html>
