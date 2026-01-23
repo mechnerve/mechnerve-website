@@ -4,33 +4,47 @@
     <meta charset="UTF-8">
     <title>Contact | MechNerve</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="description" content="Contact MechNerve Solutions for AI-powered mechanical engineering solutions">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
 </head>
 <body>
+    <header>
+        <div class="logo-box">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
+            <span>MechNerve</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
 
-<header>
-    <div class="logo-box">
-        <img src="{{ url_for('static', filename='logo.png') }}">
-        <span>MechNerve</span>
-    </div>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-    </nav>
-</header>
+    <section class="page">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you. Get in touch with us for inquiries, collaborations, or project discussions.</p>
+        
+        <div style="background: rgba(56, 189, 248, 0.1); padding: 30px; border-radius: 10px; margin: 30px 0; border-left: 4px solid #38bdf8;">
+            <p><strong>📧 Email:</strong> <a href="mailto:mechnervesolutions@gmail.com" style="color: #38bdf8;">mechnervesolutions@gmail.com</a></p>
+            <p><strong>📱 Phone:</strong> <a href="tel:+917995961231" style="color: #38bdf8;">+91 7995961231</a></p>
+            <p><strong>📍 Location:</strong> Hyderabad, Telangana, India</p>
+        </div>
+        
+        <p>For project inquiries, please include:</p>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+            <li>Project description</li>
+            <li>Timeline requirements</li>
+            <li>Any specific technical requirements</li>
+        </ul>
+        
+        <p style="margin-top: 30px;">
+            <strong>Response Time:</strong> We typically respond within 24-48 hours during business days.
+        </p>
+    </section>
 
-<section class="page">
-    <h1>Contact Us</h1>
-
-    <p><strong>Email:</strong> mechnervesolutions@gmail.com</p>
-    <p><strong>Phone:</strong> +91 7995961231</p>
-    <p><strong>Location:</strong> Hyderabad, Telangana, India</p>
-</section>
-
-<footer>
-    © 2026 MechNerve Solutions · Hyderabad, India
-</footer>
-
+    <footer>
+        © 2026 MechNerve Solutions · Hyderabad, India
+    </footer>
 </body>
 </html>
