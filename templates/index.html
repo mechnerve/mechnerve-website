@@ -2,49 +2,197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MechNerve Solutions</title>
+    <title>MechNerve Solutions | AI-Powered Mechanical Engineering</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Engineering smarter machines with Mechanical and AI solutions">
+    <meta name="description" content="MechNerve Solutions: Leading provider of AI-powered mechanical engineering, automation, and smart manufacturing solutions. Engineering smarter machines for tomorrow.">
+    <meta name="keywords" content="mechanical engineering, AI solutions, automation, robotics, smart manufacturing, industrial IoT">
+    <meta name="author" content="MechNerve Solutions">
+    <meta property="og:title" content="MechNerve Solutions">
+    <meta property="og:description" content="Engineering smarter machines with AI-powered solutions">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-area">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
-            <span>MechNerve</span>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo" class="loading-logo">
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
         </div>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </nav>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Particle Background -->
+    <div class="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-area">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Logo">
+                <span class="logo-text">MechNerve</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="/contact" class="nav-link">Contact</a>
+                <a href="/contact" class="cta-button">Get Started</a>
+            </nav>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-overlay"></div>
-        <img class="hero-bg-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="MechNerve Background Logo">
+        <div class="glow" style="top: 20%; left: 10%;"></div>
+        <div class="glow" style="bottom: 20%; right: 10%; background: radial-gradient(circle, #f472b6 0%, transparent 70%);"></div>
+        
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Background" class="hero-bg">
+        
         <div class="hero-content">
-            <h1>Engineering Smarter Machines</h1>
-            <p>Mechanical + AI solutions for a smarter tomorrow</p>
-            <a class="btn" href="/contact">Contact Us</a>
+            <h1 class="hero-title fade-in">Engineering the Future with Intelligence</h1>
+            <p class="hero-subtitle fade-in">Where mechanical precision meets artificial intelligence to create smarter, more efficient industrial solutions.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary fade-in">
+                    Explore Solutions
+                    <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="/contact" class="btn btn-secondary fade-in">Schedule a Demo</a>
+            </div>
         </div>
     </section>
 
-    <section class="services">
-        <h2>Our Services</h2>
-        <ul>
-            <li>Mechanical Design & Prototyping</li>
-            <li>Automation & Robotics Solutions</li>
-            <li>AI Integration & Machine Learning</li>
-            <li>Industrial IoT Systems</li>
-            <li>Smart Manufacturing Solutions</li>
-            <li>Predictive Maintenance Systems</li>
-        </ul>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2 class="section-title">Our Advanced Solutions</h2>
+            <p class="section-subtitle">Integrating cutting-edge technology with mechanical expertise</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h3>Intelligent Mechanical Design</h3>
+                <p>AI-driven design optimization and simulation for maximum efficiency and performance.</p>
+                <ul class="service-features">
+                    <li>Generative Design AI</li>
+                    <li>Finite Element Analysis</li>
+                    <li>3D Modeling & Simulation</li>
+                    <li>Rapid Prototyping</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in" style="transition-delay: 0.1s;">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                    </svg>
+                </div>
+                <h3>Smart Automation & Robotics</h3>
+                <p>Advanced robotic systems powered by machine learning for seamless industrial automation.</p>
+                <ul class="service-features">
+                    <li>Industrial Robotics</li>
+                    <li>Process Automation</li>
+                    <li>Machine Vision Systems</li>
+                    <li>Predictive Control</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                </div>
+                <h3>AI-Powered Analytics</h3>
+                <p>Real-time data analysis and predictive maintenance using advanced AI algorithms.</p>
+                <ul class="service-features">
+                    <li>Predictive Maintenance</li>
+                    <li>Real-time Monitoring</li>
+                    <li>Performance Optimization</li>
+                    <li>Anomaly Detection</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        © 2026 MechNerve Solutions · Hyderabad, India
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">MechNerve</div>
+                <p class="footer-text">Engineering smarter machines through the fusion of mechanical engineering and artificial intelligence.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Mechanical Design</a></li>
+                    <li><a href="#">Automation</a></li>
+                    <li><a href="#">AI Integration</a></li>
+                    <li><a href="#">Consulting</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li>Hyderabad, India</li>
+                    <li>mechnervesolutions@gmail.com</li>
+                    <li>+91 7995961231</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2026 MechNerve Solutions. All rights reserved.
+        </div>
     </footer>
 </body>
 </html>
