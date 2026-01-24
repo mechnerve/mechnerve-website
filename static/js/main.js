@@ -85,35 +85,126 @@ function initMobileMenu() {
     });
 }
 
-// Contact Form
+// Contact Form Functionality
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) return;
     
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const formMessage = document.createElement('div');
+    formMessage.id = 'formMessage';
+    formMessage.style.display = 'none';
+    formMessage.style.marginBottom = '1rem';
+    formMessage.style.padding = '1rem';
+    formMessage.style.borderRadius = '8px';
+    contactForm.appendChild(formMessage);
+    
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
+        // Reset previous messages
+        formMessage.style.display = 'none';
+        formMessage.textContent = '';
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name')?.value.trim() || '',
+            email: document.getElementById('email')?.value.trim() || '',
+            subject: document.getElementById('subject')?.value.trim() || '',
+            service: document.getElementById('service')?.value || '',
+            message: document.getElementById('message')?.value.trim() || ''
+        };
+        
         // Show loading state
-        submitBtn.textContent = 'Sending...';
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
         
         try {
-            // Simulate API call (replace with actual fetch to your Flask endpoint)
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
             
-            // Show success message
-            showNotification('Message sent successfully! We\'ll get back to you within 24 hours.', 'success');
-            contactForm.reset();
+            const data = await response.json();
+            
+            if (data.success) {
+                // Show success message
+                showFormMessage(data.message,'Message sent successfully! We\'ll get back to you within 24 hours.',  'success');
+                
+                // Reset form if email was sent
+                if (data.email_sent) {
+                    setTimeout(() => {
+                        contactForm.reset();
+                    }, 1000);
+                }
+                
+                // Optional: Send to analytics
+                console.log('Form submitted successfully:', formData);
+                
+            } else {
+                // Show error message
+                showFormMessage(data.message,'Failed to send message. Please email us directly at mechnervesolutions@gmail.com', 'error');
+            }
             
         } catch (error) {
             console.error('Error:', error);
-            showNotification('Failed to send message. Please email us directly at mechnervesolutions@gmail.com', 'error');
+            showFormMessage('Network error. Please email us directly at mechnervesolutions@gmail.com', 'error');
         } finally {
-            submitBtn.textContent = originalText;
+            // Reset button state
+            submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
         }
+    });
+    
+    function showFormMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.style.display = 'block';
+        
+        if (type === 'success') {
+            formMessage.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+            formMessage.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+            formMessage.style.color = '#10b981';
+        } else {
+            formMessage.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+            formMessage.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+            formMessage.style.color = '#ef4444';
+        }
+        
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-hide success messages after 10 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                formMessage.style.opacity = '0';
+                formMessage.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                    formMessage.style.opacity = '1';
+                }, 500);
+            }, 10000);
+        }
+    }
+    
+    // Add input validation feedback
+    const inputs = contactForm.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                this.style.borderColor = '#ef4444';
+            } else {
+                this.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+            }
+        });
+        
+        input.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--primary)';
+            this.style.boxShadow = '0 0 0 3px rgba(56, 189, 248, 0.1)';
+        });
     });
 }
 
