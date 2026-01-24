@@ -7,5 +7,12 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: SENDER_EMAIL
+        value: mechnervesolutions@gmail.com
+      - key: RECEIVER_EMAIL
+        value: mechnervesolutions@gmail.com
       - key: EMAIL_PASSWORD
-        sync: false  # Set this in Render dashboard if you want email
+        sync: false  # You'll set this manually in Render dashboard
+    autoDeploy: true
+    healthCheckPath: /health
+
