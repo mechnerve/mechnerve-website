@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initSmoothScrolling();
     initHoverEffects();
+    initCareerForm();
+    initCollaborationForm();
 });
 
 // ========== LOADING SCREEN ==========
@@ -151,145 +153,75 @@ function initScrollProgress() {
 // ========== CONTACT FORM ==========
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    if (!contactForm) {
-        console.log('⚠️ No contact form found');
-        return;
-    }
-    
-    console.log('📝 Initializing contact form');
-    
-    // Create message container if it doesn't exist
+    if (!contactForm) return;
+
     let formMessage = document.getElementById('formMessage');
-    if (!formMessage) {
-        formMessage = document.createElement('div');
-        formMessage.id = 'formMessage';
-        formMessage.style.cssText = 'display: none; margin-bottom: 1rem; padding: 1rem; border-radius: 8px;';
-        contactForm.prepend(formMessage);
-    }
-    
-    contactForm.addEventListener('submit', async function(e) {
+
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // Reset message
-        formMessage.style.display = 'none';
-        formMessage.textContent = '';
-        formMessage.className = '';
-        
-        // Get form values
-        const formData = {
-            name: contactForm.querySelector('[name="name"]')?.value.trim() || '',
-            email: contactForm.querySelector('[name="email"]')?.value.trim() || '',
-            company: contactForm.querySelector('[name="company"]')?.value.trim() || '',
-            service: contactForm.querySelector('[name="service"]')?.value || '',
-            message: contactForm.querySelector('[name="message"]')?.value.trim() || '',
-            subject: 'New Contact Form Submission - MechNerve'
+
+        const data = {
+            name: contactForm.name.value.trim(),
+            email: contactForm.email.value.trim(),
+            company: contactForm.company.value.trim(),
+            service: contactForm.service.value,
+            message: contactForm.message.value.trim(),
+            subject: 'New Contact Form Submission'
         };
-        
-        // Basic validation
-        if (!formData.name || !formData.email || !formData.service || !formData.message) {
-            showFormMessage('Please fill in all required fields (*)', 'error');
+
+        if (!data.name || !data.email || !data.service || !data.message) {
+            showMessage('All required fields must be filled', 'error');
             return;
         }
-        
-        if (!validateEmail(formData.email)) {
-            showFormMessage('Please enter a valid email address', 'error');
-            return;
-        }
-        
-        // Show loading state
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
-        submitBtn.disabled = true;
-        
+
+        const btn = contactForm.querySelector('button');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+
         try {
-            // Send to Flask backend
-            const response = await fetch('/api/contact', {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
             });
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                showFormMessage(data.message, 'success');
-                contactForm.reset();
-            } else {
-                showFormMessage(data.message || 'Failed to send message. Please try again.', 'error');
-            }
-            
-        } catch (error) {
-    console.error('Form submission error:', error);
-    showFormMessage(
-        '❌ Server error. Please try again after some time.',
-        'error'
-    );
-} finally {
 
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            const result = await res.json();
+            showMessage(result.message, result.success ? 'success' : 'error');
+            if (result.success) contactForm.reset();
+
+        } catch {
+            showMessage('Server error. Try again later.', 'error');
         }
+
+        btn.disabled = false;
+        btn.innerHTML = 'Send Message →';
     });
-    
-    function showFormMessage(message, type) {
-        formMessage.textContent = message;
-        formMessage.style.display = 'block';
-        
-        if (type === 'success') {
-            formMessage.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
-            formMessage.style.border = '1px solid rgba(16, 185, 129, 0.3)';
-            formMessage.style.color = '#10b981';
-        } else if (type === 'error') {
-            formMessage.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-            formMessage.style.border = '1px solid rgba(239, 68, 68, 0.3)';
-            formMessage.style.color = '#ef4444';
-        } else {
-            formMessage.style.backgroundColor = 'rgba(56, 189, 248, 0.1)';
-            formMessage.style.border = '1px solid rgba(56, 189, 248, 0.3)';
-            formMessage.style.color = '#38bdf8';
-        }
-        
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-            formMessage.style.opacity = '0';
-            formMessage.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-                formMessage.style.opacity = '1';
-            }, 500);
-        }, 5000);
-    }
-    
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    // Add loading spinner CSS
-    const spinnerStyle = document.createElement('style');
-    spinnerStyle.textContent = `
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 8px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    `;
-    document.head.appendChild(spinnerStyle);
-}
 
+    function showMessage(msg, type) {
+        formMessage.style.display = 'block';
+        formMessage.textContent = msg;
+        formMessage.style.color = type === 'success' ? '#10b981' : '#ef4444';
+    }
+
+    // ✅ spinner CSS injected once
+    if (!document.getElementById('spinner-style')) {
+        const style = document.createElement('style');
+        style.id = 'spinner-style';
+        style.textContent = `
+            .loading-spinner {
+                width:16px;height:16px;
+                border:2px solid rgba(255,255,255,.3);
+                border-top-color:#fff;
+                border-radius:50%;
+                animation:spin 1s linear infinite;
+                display:inline-block;
+                margin-right:8px;
+            }
+            @keyframes spin { to { transform: rotate(360deg); } }
+        `;
+        document.head.appendChild(style);
+    }
+}
 // ========== SMOOTH SCROLLING ==========
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -326,91 +258,56 @@ function initHoverEffects() {
 
 // ========== CAREER FORM FUNCTIONS ==========
 // These functions should be in your about.html file
-function openCareerForm() {
-    const modal = document.getElementById('careerModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-}
+function initCollaborationForm() {
+    const collabForm = document.getElementById('collabForm');
+    if (!collabForm) return;
 
-function closeCareerForm() {
-    const modal = document.getElementById('careerModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// ========== ERROR HANDLING ==========
-// Global error handler
-window.addEventListener('error', function(e) {
-    console.error('Global error:', e.message);
-});
-
-// Unhandled promise rejection
-window.addEventListener('unhandledrejection', function(e) {
-    console.error('Unhandled promise rejection:', e.reason);
-});
-// ================= CAREER FORM SUBMISSION =================
-const careerForm = document.getElementById("careerForm");
-
-if (careerForm) {
-    careerForm.addEventListener("submit", async (e) => {
+    collabForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Inputs
-        const name = document.getElementById("careerName");
-        const email = document.getElementById("careerEmail");
-        const phone = document.getElementById("careerPhone");
-        const role = document.getElementById("careerRole");
-        const message = document.getElementById("careerMessage");
-        const resume = document.getElementById("careerResume");
-        const consent = document.getElementById("careerConsent");
-
-        // Submit button
-        const submitBtn = careerForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerText;
-
-        // 1️⃣ Basic validation
-        if (!consent.checked) {
-            alert("Please accept the consent to proceed.");
-            return;
-        }
-
-        if (!resume.files.length) {
-            alert("Please upload your resume.");
-            return;
-        }
-
-        // 5MB limit
-        if (resume.files[0].size > 5 * 1024 * 1024) {
-            alert("Resume must be less than 5MB.");
-            return;
-        }
-
-        // 2️⃣ Disable button (UX)
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Submitting...";
-
-        // 3️⃣ Prepare form data
-        const formData = new FormData();
-        formData.append("name", name.value.trim());
-        formData.append("email", email.value.trim());
-        formData.append("phone", phone.value.trim());
-        formData.append("role", role.value);
-        formData.append("message", message.value.trim());
-        formData.append("resume", resume.files[0]);
+        const fd = new FormData(collabForm);
+        const btn = collabForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerText = 'Submitting...';
 
         try {
-            // 4️⃣ Send request
-            const response = await fetch("/api/career", {
-                method: "POST",
-                body: formData
+            const res = await fetch('/api/collaboration', { method: 'POST', body: fd });
+            const data = await res.json();
+            alert(data.message);
+            if (data.success) {
+                collabForm.reset();
+                closeCollaborationForm();
+            }
+        } catch {
+            alert('Network error');
+        }
+
+        btn.disabled = false;
+        btn.innerText = 'Submit';
+    });
+}
+
+function initCareerForm() {
+    const careerForm = document.getElementById('careerForm');
+    if (!careerForm) return;
+
+    careerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fd = new FormData(careerForm);
+        const btn = careerForm.querySelector('button[type="submit"]');
+        const originalText = btn.innerText;
+
+        btn.disabled = true;
+        btn.innerText = 'Submitting...';
+
+        try {
+            const res = await fetch('/api/career', {
+                method: 'POST',
+                body: fd
             });
 
-            const data = await response.json();
-
+            const data = await res.json();
             alert(data.message);
 
             if (data.success) {
@@ -418,58 +315,32 @@ if (careerForm) {
                 closeCareerForm();
             }
 
-        } catch (error) {
-            alert("❌ Network error. Please try again.");
+        } catch (err) {
+            alert('❌ Network error. Please try again.');
         }
 
-        // 6️⃣ Restore button
-        submitBtn.disabled = false;
-        submitBtn.innerText = originalText;
+        btn.disabled = false;
+        btn.innerText = originalText;
     });
 }
-// ================= COLLABORATION FORM SUBMISSION =================
-const collabForm = document.getElementById("collabForm");
 
-if (collabForm) {
-    collabForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+// ========== MODALS ==========
+function openCareerForm() {
+    document.getElementById('careerModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
 
-        const name = document.getElementById("collabName");
-        const email = document.getElementById("collabEmail");
-        const phone = document.getElementById("collabPhone");
+function closeCareerForm() {
+    document.getElementById('careerModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
 
-        const submitBtn = collabForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerText;
+function openCollaborationForm() {
+    document.getElementById('collaborationModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
 
-        // Disable button
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Submitting...";
-
-        const formData = new FormData();
-        formData.append("name", name.value.trim());
-        formData.append("email", email.value.trim());
-        formData.append("phone", phone.value.trim());
-        formData.append("message", "Collaboration Request");
-
-        try {
-            const response = await fetch("/api/collaboration", {
-                method: "POST",
-                body: formData
-            });
-
-            const data = await response.json();
-            alert(data.message);
-
-            if (data.success) {
-                collabForm.reset();
-                closeCollaborationForm();
-            }
-
-        } catch (error) {
-            alert("❌ Network error. Please try again.");
-        }
-
-        submitBtn.disabled = false;
-        submitBtn.innerText = originalText;
-    });
+function closeCollaborationForm() {
+    document.getElementById('collaborationModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
