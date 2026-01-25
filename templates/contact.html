@@ -108,23 +108,23 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                         <div>
                             <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Full Name *</label>
-                            <input type="text" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+                            <input type="text" name="full_name" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
                         </div>
                         
                         <div>
                             <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Email Address *</label>
-                            <input type="email" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+                            <input type="email"  name="email"required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
                         </div>
                     </div>
                     
                     <div style="margin-bottom: 1.5rem;">
                         <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Company Name</label>
-                        <input type="text" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+                        <input type="text" name="company"style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
                     </div>
                     
                     <div style="margin-bottom: 1.5rem;">
                         <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Service Interest *</label>
-                        <select required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+                        <select name="service" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
                             <option value="">Select a service</option>
                             <option value="design">Mechanical Design</option>
                             <option value="automation">Automation Solutions</option>
@@ -224,5 +224,85 @@
             </div>
         </div>
     </footer>
+    <!-- Add this code RIGHT BEFORE </body> -->
+
+<script>
+// Wait for page to load
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the form
+    const contactForm = document.getElementById('contactForm');
+    
+    // Add submit event listener
+    contactForm.addEventListener('submit', function(event) {
+        // Prevent page reload
+        event.preventDefault();
+        
+        // Get the submit button
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        
+        // Show loading state
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        // Simple validation check
+        const requiredFields = this.querySelectorAll('[required]');
+        let allValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                allValid = false;
+                field.style.borderColor = '#ff4444';
+            } else {
+                field.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+            }
+        });
+        
+        if (!allValid) {
+            alert('Please fill in all required fields (*)');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+        
+        // Collect form data
+        const formData = {
+            full_name: this.querySelector('[name="full_name"]').value,
+            email: this.querySelector('[name="email"]').value,
+            company: this.querySelector('[name="company"]').value,
+            service: this.querySelector('[name="service"]').value,
+            description: this.querySelector('[name="description"]').value,
+            timestamp: new Date().toISOString()
+        };
+        
+        // Log to console (for testing)
+        console.log('Form submitted with data:', formData);
+        
+        // Show success message (replace this with actual API call)
+        setTimeout(function() {
+            alert('✅ Message sent successfully!\nWe will contact you within 24 hours.');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Restore button
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            
+            // Log success
+            console.log('Form submitted successfully at:', new Date().toLocaleTimeString());
+            
+        }, 1500); // 1.5 second delay to simulate sending
+    });
+    
+    // Optional: Real-time validation
+    const inputs = contactForm.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            this.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+        });
+    });
+});
+</script>
 </body>
 </html>
