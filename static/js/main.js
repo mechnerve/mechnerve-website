@@ -363,3 +363,78 @@ window.addEventListener('error', function(e) {
 window.addEventListener('unhandledrejection', function(e) {
     console.error('Unhandled promise rejection:', e.reason);
 });
+// ================= CAREER FORM SUBMISSION =================
+const careerForm = document.getElementById("careerForm");
+
+if (careerForm) {
+    careerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Inputs
+        const name = document.getElementById("careerName");
+        const email = document.getElementById("careerEmail");
+        const phone = document.getElementById("careerPhone");
+        const role = document.getElementById("careerRole");
+        const message = document.getElementById("careerMessage");
+        const resume = document.getElementById("careerResume");
+        const consent = document.getElementById("careerConsent");
+
+        // Submit button
+        const submitBtn = careerForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+
+        // 1️⃣ Basic validation
+        if (!consent.checked) {
+            alert("Please accept the consent to proceed.");
+            return;
+        }
+
+        if (!resume.files.length) {
+            alert("Please upload your resume.");
+            return;
+        }
+
+        // 5MB limit
+        if (resume.files[0].size > 5 * 1024 * 1024) {
+            alert("Resume must be less than 5MB.");
+            return;
+        }
+
+        // 2️⃣ Disable button (UX)
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Submitting...";
+
+        // 3️⃣ Prepare form data
+        const formData = new FormData();
+        formData.append("name", name.value.trim());
+        formData.append("email", email.value.trim());
+        formData.append("phone", phone.value.trim());
+        formData.append("role", role.value);
+        formData.append("message", message.value.trim());
+        formData.append("resume", resume.files[0]);
+
+        try {
+            // 4️⃣ Send request
+            const response = await fetch("/api/career", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            alert(data.message);
+
+            if (data.success) {
+                careerForm.reset();
+                closeCareerForm();
+            }
+
+        } catch (error) {
+            alert("❌ Network error. Please try again.");
+        }
+
+        // 6️⃣ Restore button
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
+    });
+}
