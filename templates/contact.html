@@ -100,51 +100,65 @@
                 </div>
             </div>
             
-            <!-- Contact Form -->
-            <div class="fade-in" style="margin: 4rem 0;" id="contact-form">
-                <h2 style="font-size: 2.2rem; margin-bottom: 2rem;" class="text-gradient">Send Us a Message</h2>
-               
-                <form action="mailto:mechnervesolutions@gmail.com" method="POST" enctype="text/plain" 
-                    style="background: rgba(30, 41, 59, 0.4); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(56, 189, 248, 0.2);">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Full Name *</label>
-                            <input type="text" name="full_name" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Email Address *</label>
-                            <input type="email"  name="email"required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Company Name</label>
-                        <input type="text" name="company"style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Service Interest *</label>
-                        <select name="service" required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
-                            <option value="">Select a service</option>
-                            <option value="design">Mechanical Design</option>
-                            <option value="automation">Automation Solutions</option>
-                            <option value="ai">AI Integration</option>
-                            <option value="consulting">Consulting</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Project Description *</label>
-                        <textarea required style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem; min-height: 150px;" placeholder="Tell us about your project, timeline, and specific requirements..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
-                        Send Message →
-                    </button>
-                </form>
-            </div> 
+           <!-- Contact Form -->
+<div class="fade-in" style="margin: 4rem 0;" id="contact-form">
+    <h2 style="font-size: 2.2rem; margin-bottom: 2rem;" class="text-gradient">Send Us a Message</h2>
+    
+    <form id="contactForm" style="background: rgba(30, 41, 59, 0.4); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(56, 189, 248, 0.2);">
+        <div id="formMessage" style="display: none; margin-bottom: 1rem; padding: 1rem; border-radius: 8px;"></div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Full Name *</label>
+                <input type="text" name="name" id="name" required 
+                       placeholder="Your full name"
+                       style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Email Address *</label>
+                <input type="email" name="email" id="email" required 
+                       placeholder="you@example.com"
+                       style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Company Name</label>
+            <input type="text" name="company" id="company" 
+                   placeholder="Your company (optional)"
+                   style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Service Interest *</label>
+            <select name="service" id="service" required 
+                    style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem;">
+                <option value="">Select a service</option>
+                <option value="Mechanical Design">Mechanical Design</option>
+                <option value="Automation Solutions">Automation Solutions</option>
+                <option value="AI Integration">AI Integration</option>
+                <option value="Consulting">Consulting</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light);">Project Description *</label>
+            <textarea name="message" id="message" required rows="6"
+                      placeholder="Tell us about your project, timeline, and specific requirements..."
+                      style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; color: white; font-size: 1rem; resize: vertical;"></textarea>
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+            Send Message →
+        </button>
+        
+        <p style="margin-top: 1rem; color: var(--text-gray); font-size: 0.9rem; text-align: center;">
+            <i>We'll get back to you within 24 hours</i>
+        </p>
+    </form>
+</div>
             <!-- Project Guidelines -->
             <div class="fade-in" style="margin: 4rem 0;">
                 <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--primary);">📋 For Project Inquiries</h3>
@@ -396,82 +410,151 @@ document.getElementById('resume').addEventListener('change', function(e) {
     <!-- Add this code RIGHT BEFORE </body> -->
 
 <script>
-// Wait for page to load
+// Contact Form Submission
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the form
     const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
     
-    // Add submit event listener
-    contactForm.addEventListener('submit', function(event) {
-        // Prevent page reload
-        event.preventDefault();
-        
-        // Get the submit button
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-        
-        // Simple validation check
-        const requiredFields = this.querySelectorAll('[required]');
-        let allValid = true;
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                allValid = false;
-                field.style.borderColor = '#ff4444';
-            } else {
-                field.style.borderColor = 'rgba(56, 189, 248, 0.3)';
-            }
+    if (!contactForm) return;
+    
+    // Add input validation styling
+    const inputs = contactForm.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--primary)';
+            this.style.boxShadow = '0 0 0 3px rgba(56, 189, 248, 0.1)';
         });
         
-        if (!allValid) {
-            alert('Please fill in all required fields (*)');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+        input.addEventListener('blur', function() {
+            this.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+            this.style.boxShadow = 'none';
+        });
+    });
+    
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset message
+        formMessage.style.display = 'none';
+        formMessage.textContent = '';
+        formMessage.className = '';
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            company: document.getElementById('company').value.trim(),
+            service: document.getElementById('service').value,
+            message: document.getElementById('message').value.trim(),
+            subject: document.getElementById('company').value.trim() 
+                ? `Inquiry from ${document.getElementById('name').value.trim()} (${document.getElementById('company').value.trim()})`
+                : `Inquiry from ${document.getElementById('name').value.trim()}`
+        };
+        
+        // Validation
+        if (!formData.name || !formData.email || !formData.service || !formData.message) {
+            showFormMessage('Please fill in all required fields (*)', 'error');
             return;
         }
         
-        // Collect form data
-        const formData = {
-            full_name: this.querySelector('[name="full_name"]').value,
-            email: this.querySelector('[name="email"]').value,
-            company: this.querySelector('[name="company"]').value,
-            service: this.querySelector('[name="service"]').value,
-            description: this.querySelector('[name="description"]').value,
-            timestamp: new Date().toISOString()
-        };
+        if (!validateEmail(formData.email)) {
+            showFormMessage('Please enter a valid email address', 'error');
+            return;
+        }
         
-        // Log to console (for testing)
-        console.log('Form submitted with data:', formData);
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+        submitBtn.disabled = true;
         
-        // Show success message (replace this with actual API call)
-        setTimeout(function() {
-            alert('✅ Message sent successfully!\nWe will contact you within 24 hours.');
+        try {
+            // Send to Flask backend
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
             
-            // Reset form
-            contactForm.reset();
+            const data = await response.json();
             
-            // Restore button
-            submitBtn.textContent = originalText;
+            if (data.success) {
+                showFormMessage(data.message, 'success');
+                contactForm.reset();
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            } else {
+                showFormMessage(data.message || 'Failed to send message. Please try again.', 'error');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+            
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showFormMessage('Network error. Please email us directly at mechnervesolutions@gmail.com', 'error');
+            submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-            
-            // Log success
-            console.log('Form submitted successfully at:', new Date().toLocaleTimeString());
-            
-        }, 1500); // 1.5 second delay to simulate sending
+        }
     });
     
-    // Optional: Real-time validation
-    const inputs = contactForm.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        input.addEventListener('input', function() {
-            this.style.borderColor = 'rgba(56, 189, 248, 0.3)';
-        });
-    });
+    function showFormMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.style.display = 'block';
+        
+        if (type === 'success') {
+            formMessage.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+            formMessage.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+            formMessage.style.color = '#10b981';
+        } else {
+            formMessage.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+            formMessage.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+            formMessage.style.color = '#ef4444';
+        }
+        
+        // Auto-hide success messages after 10 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                formMessage.style.opacity = '0';
+                formMessage.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                    formMessage.style.opacity = '1';
+                }, 500);
+            }, 10000);
+        }
+    }
+    
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
 });
+
+// Add loading spinner CSS
+const spinnerStyle = document.createElement('style');
+spinnerStyle.textContent = `
+    .loading-spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 8px;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(spinnerStyle);
 </script>
 </body>
 </html>
