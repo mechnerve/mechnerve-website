@@ -511,19 +511,160 @@
                 </div>
             </div>
             
-            <!-- Join Team CTA -->
-            <div class="fade-in" style="text-align: center; padding: 4rem; background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(244, 114, 182, 0.1)); border-radius: 15px; margin: 4rem 0;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;" class="text-gradient">Join Our Growing Team</h3>
-                <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">
-                    We're always looking for talented engineers, AI specialists, and innovators who are passionate about 
-                    transforming industries through intelligent mechanical solutions.
-                </p>
-                <a href="mailto:careers@mechnervesolutions.com" class="btn" style="padding: 1rem 3rem; font-size: 1.1rem;">
-                    Explore Careers →
-                </a>
-            </div>
+           <!-- Add this button in your About page where you want the "Explore Careers" button -->
+<section class="fade-in" style="padding: 4rem 5%;">
+    <div style="text-align: center;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 2rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            Join Our Team
+        </h2>
+        <p style="max-width: 600px; margin: 0 auto 3rem; color: var(--text-gray); font-size: 1.1rem;">
+            We're always looking for talented individuals to join our innovative team. 
+            If you're passionate about engineering and AI, we'd love to hear from you.
+        </p>
+        <button onclick="openCareerForm()" class="btn" style="padding: 1.2rem 3rem; font-size: 1.1rem;">
+            Explore Careers →
+        </button>
+    </div>
+</section>
+
+<!-- Career Application Modal -->
+<div id="careerModal" class="career-modal">
+    <div class="career-modal-content" style="background: var(--dark-bg); border: 1px solid rgba(56, 189, 248, 0.2);">
+        <div class="career-modal-header" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(244, 114, 182, 0.9));">
+            <h2 style="color: white; margin: 0;">Career Application</h2>
+            <button onclick="closeCareerForm()" class="career-close">&times;</button>
         </div>
-    </section>
+        
+        <div class="career-modal-body">
+            <form id="careerForm" class="career-form" style="background: rgba(30, 41, 59, 0.3); padding: 2rem; border-radius: 10px;">
+                <!-- Personal Information -->
+                <div class="form-section" style="margin-bottom: 2.5rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="background: rgba(56, 189, 248, 0.1); padding: 0.5rem; border-radius: 8px;">👤</span>
+                        Personal Information
+                    </h3>
+                    
+                    <div class="career-form-row">
+                        <div class="career-form-group">
+                            <label for="careerName" style="color: var(--text-light);">
+                                Full Name <span class="career-required">*</span>
+                            </label>
+                            <input type="text" id="careerName" required 
+                                   placeholder="Enter your full name"
+                                   style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
+                        </div>
+                        
+                        <div class="career-form-group">
+                            <label for="careerEmail" style="color: var(--text-light);">
+                                Email Address <span class="career-required">*</span>
+                            </label>
+                            <input type="email" id="careerEmail" required 
+                                   placeholder="your.email@example.com"
+                                   style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
+                        </div>
+                    </div>
+                    
+                    <div class="career-form-row">
+                        <div class="career-form-group">
+                            <label for="careerPhone" style="color: var(--text-light);">
+                                Phone Number <span class="career-required">*</span>
+                            </label>
+                            <input type="tel" id="careerPhone" required 
+                                   placeholder="+91 98765 43210"
+                                   style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
+                        </div>
+                        
+                        <div class="career-form-group">
+                            <label for="careerRole" style="color: var(--text-light);">
+                                Applying For <span class="career-required">*</span>
+                            </label>
+                            <select id="careerRole" required
+                                    style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
+                                <option value="" disabled selected>Select Position</option>
+                                <option value="Mechanical Engineer">Mechanical Engineer</option>
+                                <option value="AI/ML Engineer">AI/ML Engineer</option>
+                                <option value="Software Developer">Software Developer</option>
+                                <option value="Data Scientist">Data Scientist</option>
+                                <option value="Research Intern">Research Intern</option>
+                                <option value="Project Manager">Project Manager</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resume Upload -->
+                <div class="form-section" style="margin-bottom: 2.5rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="background: rgba(56, 189, 248, 0.1); padding: 0.5rem; border-radius: 8px;">📄</span>
+                        Resume/CV
+                    </h3>
+                    
+                    <div class="career-file-upload" style="border-color: rgba(56, 189, 248, 0.3);">
+                        <input type="file" id="careerResume" accept=".pdf,.doc,.docx" 
+                               class="career-file-input" required>
+                        <div class="career-file-icon" style="color: var(--primary);">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <div class="career-file-text" style="color: var(--text-light);">
+                            Upload your Resume/CV
+                        </div>
+                        <div class="career-file-subtext" style="color: var(--text-gray);">
+                            PDF, DOC, DOCX (Max 5MB)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cover Letter -->
+                <div class="form-section" style="margin-bottom: 2.5rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="background: rgba(56, 189, 248, 0.1); padding: 0.5rem; border-radius: 8px;">✍️</span>
+                        Additional Information
+                    </h3>
+                    
+                    <div class="career-form-group">
+                        <label for="careerMessage" style="color: var(--text-light);">
+                            Cover Letter / Why you're interested <span class="career-required">*</span>
+                        </label>
+                        <textarea id="careerMessage" rows="4" required 
+                                  placeholder="Tell us why you're interested in joining MechNerve Solutions..."
+                                  style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light); resize: vertical;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Consent -->
+                <div class="form-section" style="margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: rgba(56, 189, 248, 0.05); border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.1);">
+                        <input type="checkbox" id="careerConsent" required 
+                               style="margin-top: 3px;">
+                        <label for="careerConsent" style="color: var(--text-gray); font-size: 0.9rem; line-height: 1.4;">
+                            I agree to the processing of my personal data for recruitment purposes as described in the 
+                            <a href="#" style="color: var(--primary); text-decoration: none;">Privacy Policy</a>. 
+                            I confirm that the information provided is accurate.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="career-form-buttons">
+                    <button type="button" onclick="closeCareerForm()" 
+                            style="flex: 0.3; background: transparent; border: 1px solid rgba(244, 114, 182, 0.3); color: var(--text-light); padding: 1rem; border-radius: 6px; font-size: 1rem; cursor: pointer; transition: var(--transition-fast);">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            style="flex: 1; background: var(--gradient-primary); color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: var(--transition-fast); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);">
+                        Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
     <!-- Footer -->
     <footer>
