@@ -222,24 +222,13 @@ function initContactForm() {
             }
             
         } catch (error) {
-            console.error('Form submission error:', error);
-            
-            // Fallback to mailto if API fails
-            const name = encodeURIComponent(formData.name);
-            const email = encodeURIComponent(formData.email);
-            const service = encodeURIComponent(formData.service);
-            const message = encodeURIComponent(formData.message);
-            const company = encodeURIComponent(formData.company);
-            
-            const mailtoLink = `mailto:mechnervesolutions@gmail.com?subject=Contact%20Form%20Submission&body=Name:%20${name}%0AEmail:%20${email}%0ACompany:%20${company}%0AService:%20${service}%0A%0AMessage:%0A${message}`;
-            
-            showFormMessage('Using fallback method. Click OK to open email client.', 'info');
-            
-            setTimeout(() => {
-                window.open(mailtoLink, '_blank');
-            }, 1000);
-            
-        } finally {
+    console.error('Form submission error:', error);
+    showFormMessage(
+        '❌ Server error. Please try again after some time.',
+        'error'
+    );
+} finally {
+
             // Reset button
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
