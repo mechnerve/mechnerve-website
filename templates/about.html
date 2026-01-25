@@ -711,5 +711,21 @@
             </div>
         </div>
     </footer>
+<style>
+/* FIX 1: file input should NOT cover entire modal */
+.career-file-upload input[type="file"] {
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    pointer-events: auto !important;
+}
+</style>
+            <style>
+/* FIX 2: allow scrolling inside career modal */
+.career-modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+</style>
 </body>
 </html>
