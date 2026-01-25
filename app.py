@@ -75,38 +75,48 @@ def sanitize_input(text):
     return text[:5000]
 
 def send_email_via_smtp(data):
-    """Send email using SMTP directly"""
     try:
-        # Email configuration - Use environment variables
         sender_email = os.environ.get("SENDER_EMAIL", "mechnervesolutions@gmail.com")
         receiver_email = os.environ.get("RECEIVER_EMAIL", "mechnervesolutions@gmail.com")
         password = os.environ.get("EMAIL_PASSWORD", "")
-        
-        # If no password is set in environment, try to get from config
+
         if not password:
-            password = os.environ.get("SMTP_PASSWORD", "")
-        
-        if not password:
-            logger.warning("⚠️ No email password configured. Email sending disabled.")
+            logger.warning("⚠️ No email password configured.")
             return False
-        
-        # Sanitize inputs
-        name = sanitize_input(data.get('name', 'Not provided'))
-        email = sanitize_input(data.get('email', 'Not provided'))
-        subject = sanitize_input(data.get('subject', 'No Subject'))
-        service = sanitize_input(data.get('service', 'Not specified'))
-        message = sanitize_input(data.get('message', 'Not provided'))
-        
-        # Create message
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = f"📧 MechNerve Contact: {subject[:50]}"
-        msg['From'] = f"MechNerve Website <{sender_email}>"
-        msg['To'] = receiver_email
-        msg['Reply-To'] = email
-        msg['X-Priority'] = '1'  # High priority
+
+        name = sanitize_input(data.get("name", "Not provided"))
+        email = sanitize_input(data.get("email", "Not provided"))
+        subject = sanitize_input(data.get("subject", "No Subject"))
+        service = sanitize_input(data.get("service", "Not specified"))
+        message = sanitize_input(data.get("message", "Not provided"))
+
+        msg = MIMEMultipart()
+        msg["Subject"] = f"📧 MechNerve Contact: {subject[:50]}"
+        msg["From"] = f"MechNerve Website <{sender_email}>"
+        msg["To"] = receiver_email
+        msg["Reply-To"] = email
+
+        body = f"""
+Name: {name}
+Email: {email}
+Service: {service}
+
+Message:
+{message}
+"""
+        msg.attach(MIMEText(body, "plain"))
+
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender_email, password)
+            server.send_message(msg)
+
         return True
-        
-@app.route("/api/career", methods=["POST"])
+
+    except Exception as e:
+        logger.error(f"Email sending failed: {e}")
+        return False
+
 def career_api():
     try:
         # 1️⃣ Read form fields
@@ -634,6 +644,7 @@ if __name__ == "__main__":
         logger.info("For Gmail, use App Password (not your regular password)")
     
     app.run(debug=True, host='0.0.0.0', port=port)
+
 
 
 
