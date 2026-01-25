@@ -104,8 +104,9 @@ def send_email_via_smtp(data):
         msg['To'] = receiver_email
         msg['Reply-To'] = email
         msg['X-Priority'] = '1'  # High priority
-
-        @app.route("/api/career", methods=["POST"])
+        return True
+        
+@app.route("/api/career", methods=["POST"])
 def career_api():
     try:
         # 1️⃣ Read form fields
@@ -633,6 +634,7 @@ if __name__ == "__main__":
         logger.info("For Gmail, use App Password (not your regular password)")
     
     app.run(debug=True, host='0.0.0.0', port=port)
+
 
 
 
