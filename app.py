@@ -190,6 +190,82 @@ Cover Letter:
             "message": "Server error while submitting application"
         }), 500
 
+        @app.route("/api/collaboration", methods=["POST"])
+def collaboration_api():
+    try:
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        phone = request.form.get("phone", "").strip()
+        message = request.form.get("message", "").strip()
+        resume = request.files.get("resume")
+
+        if not all([name, email, phone, message, resume]):
+            return jsonify({
+                "success": False,
+                "message": "All fields are required"
+            }), 400
+
+        if not allowed_file(resume.filename):
+            return jsonify({
+                "success": False,
+                "message": "Resume must be PDF, DOC, or DOCX"
+            }), 400
+
+        filename = secure_filename(resume.filename)
+        filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+        resume.save(filepath)
+
+        sender = os.environ["SENDER_EMAIL"]
+        receiver = os.environ["RECEIVER_EMAIL"]
+        password = os.environ["EMAIL_PASSWORD"]
+
+        msg = MIMEMultipart()
+        msg["Subject"] = "🤝 New Collaboration Request"
+        msg["From"] = f"MechNerve Collaboration <{sender}>"
+        msg["To"] = receiver
+        msg["Reply-To"] = email
+
+        body = f"""
+New Collaboration Request – MechNerve Solutions
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+
+Message:
+{message}
+        """
+
+        msg.attach(MIMEText(body, "plain"))
+
+        with open(filepath, "rb") as f:
+            attachment = MIMEText(f.read(), "base64")
+            attachment.add_header(
+                "Content-Disposition",
+                f'attachment; filename="{filename}"'
+            )
+            msg.attach(attachment)
+
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender, password)
+            server.send_message(msg)
+
+        os.remove(filepath)
+
+        return jsonify({
+            "success": True,
+            "message": "✅ Collaboration request sent successfully"
+        })
+
+    except Exception as e:
+        logger.error(str(e))
+        return jsonify({
+            "success": False,
+            "message": "Server error while submitting collaboration request"
+        }), 500
+
+
         # Plain text version
         text = f"""
 🔔 NEW CONTACT FORM SUBMISSION - MechNerve Solutions
@@ -557,6 +633,7 @@ if __name__ == "__main__":
         logger.info("For Gmail, use App Password (not your regular password)")
     
     app.run(debug=True, host='0.0.0.0', port=port)
+
 
 
 
