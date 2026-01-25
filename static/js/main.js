@@ -20,41 +20,38 @@ function initLoadingScreen() {
     
     if (!loadingScreen) {
         console.log('⚠️ No loading screen found');
+        initFadeInAnimations();
         return;
     }
     
-    // Check if page is already loaded
-    if (document.readyState === 'complete') {
-        console.log('📄 Page already loaded, hiding loading screen');
-        hideLoadingScreen();
-    } else {
-        window.addEventListener('load', function() {
-            console.log('✅ Page fully loaded');
-            // Hide after 500ms delay for smooth transition
-            setTimeout(hideLoadingScreen, 500);
-        });
-    }
+    // Immediately enable scrolling on body
+    document.body.style.overflow = 'auto';
+    document.body.style.position = 'static';
     
-    // Fallback: hide after 3 seconds max
-    setTimeout(hideLoadingScreen, 3000);
-}
-
-function hideLoadingScreen() {
-    const loadingScreen = document.querySelector('.loading-screen');
-    if (loadingScreen) {
-        console.log('👋 Hiding loading screen');
-        loadingScreen.style.opacity = '0';
-        loadingScreen.style.visibility = 'hidden';
+    // Hide loading screen immediately
+    loadingScreen.style.opacity = '0';
+    loadingScreen.style.visibility = 'hidden';
+    
+    // Remove from DOM quickly
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        console.log('✅ Loading screen removed');
         
-        // Remove from DOM after animation
-        setTimeout(() => {
+        // Enable body scrolling
+        document.body.style.overflow = 'visible';
+        document.documentElement.style.overflow = 'visible';
+        
+        // Trigger fade-in animations
+        triggerFadeInAnimations();
+    }, 300);
+    
+    // Fallback: hide after 1 second max
+    setTimeout(() => {
+        if (loadingScreen.style.display !== 'none') {
             loadingScreen.style.display = 'none';
-            console.log('✅ Loading screen hidden');
-            
-            // Trigger fade-in animations
-            triggerFadeInAnimations();
-        }, 800);
-    }
+            document.body.style.overflow = 'visible';
+        }
+    }, 1000);
 }
 
 // ========== MOBILE MENU ==========
