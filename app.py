@@ -8,6 +8,9 @@ from datetime import datetime
 import logging
 from functools import wraps
 import traceback
+from dotenv import load_dotenv
+load_dotenv()
+
 
 app = Flask(__name__)
 
@@ -459,4 +462,5 @@ if __name__ == "__main__":
         logger.info("For Gmail, use App Password (not your regular password)")
     
     app.run(debug=True, host='0.0.0.0', port=port)
+
 
