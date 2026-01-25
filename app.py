@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request, jsonify, make_response
 from werkzeug.utils import secure_filename
-import os
-import smtplib
+import os, smtplib, logging, traceback
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 from datetime import datetime
-import json
-import logging
-import traceback
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,7 +17,6 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = {"pdf", "doc", "docx"}
-
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -27,64 +24,47 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ==================================================
-# SECURITY HEADERS
-# ==================================================
-@app.after_request
-def add_security_headers(response):
-    response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "DENY"
-    response.headers["X-XSS-Protection"] = "1; mode=block"
-    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
-    return response
-
-# ==================================================
 # HELPERS
 # ==================================================
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def sanitize_input(text):
-    if not text:
-        return ""
-    text = str(text)
-    text = text.replace("<", "&lt;").replace(">", "&gt;")
-    return text[:5000]
-
 def validate_email(email):
     import re
-    pattern = r"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$"
-    return re.match(pattern, email) is not None
+    return re.match(r"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$", email)
 
 # ==================================================
-# EMAIL SENDER
+# EMAIL
 # ==================================================
-def send_email(subject, body, reply_to=None, attachment_path=None, attachment_name=None):
+def send_email(subject, body, reply_to=None, attachment_path=None):
     try:
-        sender = os.environ.get("SENDER_EMAIL")
-        receiver = os.environ.get("RECEIVER_EMAIL")
-        password = os.environ.get("EMAIL_PASSWORD")
+        sender = os.getenv("SENDER_EMAIL")
+        receiver = os.getenv("RECEIVER_EMAIL")
+        password = os.getenv("EMAIL_PASSWORD")
 
         if not all([sender, receiver, password]):
-            logger.error("Email environment variables not configured")
+            logger.error("Email env vars missing")
             return False
 
         msg = MIMEMultipart()
-        msg["Subject"] = subject
         msg["From"] = f"MechNerve Website <{sender}>"
         msg["To"] = receiver
+        msg["Subject"] = subject
         if reply_to:
             msg["Reply-To"] = reply_to
 
         msg.attach(MIMEText(body, "plain"))
 
-        if attachment_path and os.path.exists(attachment_path):
+        if attachment_path:
+            part = MIMEBase("application", "octet-stream")
             with open(attachment_path, "rb") as f:
-                part = MIMEText(f.read(), "base64")
-                part.add_header(
-                    "Content-Disposition",
-                    f'attachment; filename="{attachment_name}"'
-                )
-                msg.attach(part)
+                part.set_payload(f.read())
+            encoders.encode_base64(part)
+            part.add_header(
+                "Content-Disposition",
+                f'attachment; filename="{os.path.basename(attachment_path)}"'
+            )
+            msg.attach(part)
 
         with smtplib.SMTP("smtp.gmail.com", 587) as server:
             server.starttls()
@@ -93,8 +73,7 @@ def send_email(subject, body, reply_to=None, attachment_path=None, attachment_na
 
         return True
 
-    except Exception as e:
-        logger.error(f"Email error: {e}")
+    except Exception:
         logger.error(traceback.format_exc())
         return False
 
@@ -102,45 +81,31 @@ def send_email(subject, body, reply_to=None, attachment_path=None, attachment_na
 # PAGES
 # ==================================================
 @app.route("/")
-def home():
-    return render_template("index.html")
+def home(): return render_template("index.html")
 
 @app.route("/about")
-def about():
-    return render_template("about.html")
+def about(): return render_template("about.html")
 
 @app.route("/contact")
-def contact():
-    return render_template("contact.html")
+def contact(): return render_template("contact.html")
 
 # ==================================================
 # CONTACT API
 # ==================================================
-@app.route("/api/contact", methods=["POST", "OPTIONS"])
+@app.route("/api/contact", methods=["POST"])
 def contact_api():
-    if request.method == "OPTIONS":
-        return make_response("", 200)
-
     try:
-        if not request.is_json:
-            return jsonify({"success": False, "message": "Invalid JSON"}), 400
+        data = request.get_json()
+        name = data.get("name", "").strip()
+        email = data.get("email", "").strip()
+        service = data.get("service", "General")
+        message = data.get("message", "").strip()
 
-        data = request.json
-
-        name = sanitize_input(data.get("name"))
-        email = sanitize_input(data.get("email"))
-        subject = sanitize_input(data.get("subject"))
-        service = sanitize_input(data.get("service", "General"))
-        message = sanitize_input(data.get("message"))
-
-        if not all([name, email, subject, message]):
-            return jsonify({"success": False, "message": "All fields required"}), 400
-
-        if not validate_email(email):
-            return jsonify({"success": False, "message": "Invalid email"}), 400
+        if not all([name, email, message]):
+            return jsonify(success=False, message="All fields required"), 400
 
         body = f"""
-New Contact Submission
+CONTACT FORM
 
 Name: {name}
 Email: {email}
@@ -150,47 +115,43 @@ Message:
 {message}
 """
 
-        sent = send_email(
-            subject=f"📩 Contact Form – {subject}",
+        send_email(
+            subject="📩 New Contact Form",
             body=body,
             reply_to=email
         )
 
-        return jsonify({
-            "success": True,
-            "message": "✅ Message received. We’ll get back to you shortly.",
-            "email_sent": sent
-        })
+        return jsonify(success=True, message="✅ Message sent successfully")
 
-    except Exception as e:
+    except Exception:
         logger.error(traceback.format_exc())
-        return jsonify({"success": False, "message": "Server error"}), 500
+        return jsonify(success=False, message="Server error"), 500
 
 # ==================================================
-# CAREER API (WITH RESUME)
+# CAREER API
 # ==================================================
 @app.route("/api/career", methods=["POST"])
 def career_api():
     try:
-        name = request.form.get("name", "").strip()
-        email = request.form.get("email", "").strip()
-        phone = request.form.get("phone", "").strip()
-        role = request.form.get("role", "").strip()
-        message = request.form.get("message", "").strip()
+        name = request.form.get("name")
+        email = request.form.get("email")
+        phone = request.form.get("phone")
+        role = request.form.get("role")
+        message = request.form.get("message")
         resume = request.files.get("resume")
 
         if not all([name, email, phone, role, message, resume]):
-            return jsonify({"success": False, "message": "All fields required"}), 400
+            return jsonify(success=False, message="All fields required"), 400
 
         if not allowed_file(resume.filename):
-            return jsonify({"success": False, "message": "Invalid resume file"}), 400
+            return jsonify(success=False, message="Invalid resume file"), 400
 
         filename = secure_filename(resume.filename)
-        filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        resume.save(filepath)
+        path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+        resume.save(path)
 
         body = f"""
-New Career Application
+CAREER APPLICATION
 
 Name: {name}
 Email: {email}
@@ -205,37 +166,33 @@ Message:
             subject=f"📄 Career Application – {role}",
             body=body,
             reply_to=email,
-            attachment_path=filepath,
-            attachment_name=filename
+            attachment_path=path
         )
 
-        os.remove(filepath)
+        os.remove(path)
 
-        return jsonify({
-            "success": True,
-            "message": "✅ Application submitted successfully"
-        })
+        return jsonify(success=True, message="✅ Application submitted")
 
-    except Exception as e:
+    except Exception:
         logger.error(traceback.format_exc())
-        return jsonify({"success": False, "message": "Server error"}), 500
+        return jsonify(success=False, message="Server error"), 500
 
 # ==================================================
-# COLLABORATION API (NO RESUME)
+# COLLABORATION API
 # ==================================================
 @app.route("/api/collaboration", methods=["POST"])
 def collaboration_api():
     try:
-        name = request.form.get("name", "").strip()
-        email = request.form.get("email", "").strip()
-        phone = request.form.get("phone", "").strip()
-        message = request.form.get("message", "").strip()
+        name = request.form.get("name")
+        email = request.form.get("email")
+        phone = request.form.get("phone")
+        message = request.form.get("message", "")
 
         if not all([name, email, phone]):
-            return jsonify({"success": False, "message": "All fields required"}), 400
+            return jsonify(success=False, message="All fields required"), 400
 
         body = f"""
-New Collaboration Request
+COLLABORATION REQUEST
 
 Name: {name}
 Email: {email}
@@ -251,28 +208,14 @@ Message:
             reply_to=email
         )
 
-        return jsonify({
-            "success": True,
-            "message": "✅ Collaboration request sent"
-        })
+        return jsonify(success=True, message="✅ Collaboration request sent")
 
-    except Exception as e:
+    except Exception:
         logger.error(traceback.format_exc())
-        return jsonify({"success": False, "message": "Server error"}), 500
-
-# ==================================================
-# HEALTH CHECK
-# ==================================================
-@app.route("/health")
-def health():
-    return jsonify({
-        "status": "healthy",
-        "time": datetime.now().isoformat()
-    })
+        return jsonify(success=False, message="Server error"), 500
 
 # ==================================================
 # RUN
 # ==================================================
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
