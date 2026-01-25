@@ -438,3 +438,49 @@ if (careerForm) {
         submitBtn.innerText = originalText;
     });
 }
+// ================= COLLABORATION FORM SUBMISSION =================
+const collabForm = document.getElementById("collabForm");
+
+if (collabForm) {
+    collabForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("collabName");
+        const email = document.getElementById("collabEmail");
+        const phone = document.getElementById("collabPhone");
+
+        const submitBtn = collabForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+
+        // Disable button
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Submitting...";
+
+        const formData = new FormData();
+        formData.append("name", name.value.trim());
+        formData.append("email", email.value.trim());
+        formData.append("phone", phone.value.trim());
+        formData.append("message", "Collaboration Request");
+
+        try {
+            const response = await fetch("/api/collaboration", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+            alert(data.message);
+
+            if (data.success) {
+                collabForm.reset();
+                closeCollaborationForm();
+            }
+
+        } catch (error) {
+            alert("❌ Network error. Please try again.");
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
+    });
+}
