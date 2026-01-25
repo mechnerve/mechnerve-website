@@ -255,77 +255,6 @@
     </div>
 </div>
 
-<script>
-// Modal functions
-function openCollaborationForm() {
-    document.getElementById('collaborationModal').style.display = 'flex';
-}
-
-function closeCollaborationForm() {
-    document.getElementById('collaborationModal').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'none';
-    document.getElementById('collaborationForm').style.display = 'flex';
-    document.getElementById('collaborationForm').reset();
-}
-
-// Close modal when clicking outside
-document.getElementById('collaborationModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeCollaborationForm();
-    }
-});
-
-// Form submission handler
-document.getElementById('collaborationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    
-    // Create email subject and body
-    const subject = `Collaboration Inquiry from ${name}`;
-    let body = `New Collaboration Inquiry:\n\n`;
-    body += `Name: ${name}\n`;
-    body += `Email: ${email}\n`;
-    body += `Phone: ${phone}\n\n`;
-    body += `Submitted on: ${new Date().toLocaleString()}\n\n`;
-    body += `Note: Resume attached separately.`;
-    
-    // Create mailto link
-    const mailtoLink = `mailto:mechnervesolutions@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Show file attachment notice
-    const resumeInput = document.getElementById('resume');
-    const fileName = resumeInput.files[0] ? resumeInput.files[0].name : 'No file selected';
-    alert(`IMPORTANT:\n\n1. An email draft will open\n2. Please MANUALLY attach your resume file: ${fileName}\n3. Then click Send`);
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Show success message
-    document.getElementById('collaborationForm').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'block';
-    
-    // Reset form after 5 seconds
-    setTimeout(() => {
-        closeCollaborationForm();
-    }, 5000);
-});
-
-// Optional: File size validation
-document.getElementById('resume').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-    
-    if (file && file.size > maxSize) {
-        alert('File size exceeds 5MB limit. Please choose a smaller file.');
-        e.target.value = ''; // Clear the file input
-    }
-});
-</script>
-
 <style>
     #collaborationModal {
         animation: fadeIn 0.3s ease-out;
@@ -412,7 +341,5 @@ document.getElementById('resume').addEventListener('change', function(e) {
             </div>
         </div>
     </footer>
-        <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
-
 </body>
 </html>
