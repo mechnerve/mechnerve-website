@@ -553,7 +553,7 @@
                             <label for="careerName" style="color: var(--text-light);">
                                 Full Name <span class="career-required">*</span>
                             </label>
-                            <input type="text" id="careerName" required 
+                            <input type="text" id="careerName" name="name" required 
                                    placeholder="Enter your full name"
                                    style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
                         </div>
@@ -562,7 +562,7 @@
                             <label for="careerEmail" style="color: var(--text-light);">
                                 Email Address <span class="career-required">*</span>
                             </label>
-                            <input type="email" id="careerEmail" required 
+                            <input type="email" id="careerEmail" name="email" required 
                                    placeholder="your.email@example.com"
                                    style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
                         </div>
@@ -573,7 +573,7 @@
                             <label for="careerPhone" style="color: var(--text-light);">
                                 Phone Number <span class="career-required">*</span>
                             </label>
-                            <input type="tel" id="careerPhone" required 
+                            <input type="tel" id="careerPhone" name="phone" required 
                                    placeholder="+91 98765 43210"
                                    style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
                         </div>
@@ -582,7 +582,7 @@
                             <label for="careerRole" style="color: var(--text-light);">
                                 Applying For <span class="career-required">*</span>
                             </label>
-                            <select id="careerRole" required
+                            <select id="careerRole"  name="role"required
                                     style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light);">
                                 <option value="" disabled selected>Select Position</option>
                                 <option value="Mechanical Engineer">Mechanical Engineer</option>
@@ -604,7 +604,7 @@
                     </h3>
                     
                     <div class="career-file-upload" style="border-color: rgba(56, 189, 248, 0.3);">
-                        <input type="file" id="careerResume" accept=".pdf,.doc,.docx" 
+                        <input type="file" id="careerResume" name="resume"accept=".pdf,.doc,.docx" 
                                class="career-file-input" required>
                         <div class="career-file-icon" style="color: var(--primary);">
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -635,7 +635,7 @@
                         <label for="careerMessage" style="color: var(--text-light);">
                             Cover Letter / Why you're interested <span class="career-required">*</span>
                         </label>
-                        <textarea id="careerMessage" rows="4" required 
+                        <textarea id="careerMessage" name="message" rows="4" required 
                                   placeholder="Tell us why you're interested in joining MechNerve Solutions..."
                                   style="background: rgba(2, 6, 23, 0.5); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--text-light); resize: vertical;"></textarea>
                     </div>
