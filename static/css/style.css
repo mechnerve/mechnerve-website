@@ -1305,3 +1305,241 @@ footer {
 .fa-envelope:before {
     content: "\f0e0";
 }
+/* ===== CAREER FORM MODAL ===== */
+.career-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.career-modal-content {
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 15px;
+    overflow: hidden;
+    animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-xl);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.career-modal-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(244, 114, 182, 0.9));
+}
+
+.career-modal-header h2 {
+    margin: 0;
+    font-weight: 600;
+    color: white;
+}
+
+.career-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    backdrop-filter: blur(10px);
+}
+
+.career-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.career-modal-body {
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(90vh - 80px);
+}
+
+.career-form {
+    padding: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.career-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .career-form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.career-form-group {
+    margin-bottom: 0;
+}
+
+.career-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.career-form-group input,
+.career-form-group select,
+.career-form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(2, 6, 23, 0.5);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: var(--transition-fast);
+}
+
+.career-form-group input:focus,
+.career-form-group select:focus,
+.career-form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+.career-required {
+    color: #f87171;
+}
+
+/* File Upload */
+.career-file-upload {
+    border: 2px dashed rgba(56, 189, 248, 0.3);
+    border-radius: 10px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    background: rgba(2, 6, 23, 0.3);
+}
+
+.career-file-upload:hover {
+    border-color: var(--primary);
+    background: rgba(56, 189, 248, 0.05);
+}
+
+.career-file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.career-file-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.career-file-text {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.career-file-subtext {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* Form Buttons */
+.career-form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.career-form-buttons button {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: none;
+}
+
+.career-form-buttons button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.career-form-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .career-modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .career-form {
+        padding: 1.5rem;
+    }
+    
+    .career-modal-header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .career-form-buttons {
+        flex-direction: column;
+    }
+}
