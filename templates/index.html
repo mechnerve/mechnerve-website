@@ -185,5 +185,63 @@
             </div>
         </div>
     </footer>
+    <script>
+// Emergency fix for scrolling
+window.addEventListener('load', function() {
+    console.log('✅ Page loaded - enabling scrolling');
+    
+    // Force enable scrolling
+    document.body.style.overflow = 'auto';
+    document.body.style.position = 'static';
+    document.documentElement.style.overflow = 'auto';
+    document.documentElement.style.position = 'static';
+    
+    // Remove loading screen
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (loadingScreen) {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            console.log('✅ Loading screen hidden');
+        }, 300);
+    }
+    
+    // Add loaded class to body
+    document.body.classList.add('loaded');
+    
+    // Force trigger any stuck animations
+    document.querySelectorAll('.fade-in').forEach(el => {
+        el.classList.add('visible');
+    });
+});
+
+// Also run on DOMContentLoaded as backup
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.overflow = 'auto';
+    document.body.style.position = 'static';
+});
+</script>
+
+<style>
+/* Emergency inline styles to fix scrolling */
+body {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: 100vh !important;
+}
+
+.loading-screen {
+    transition: opacity 0.3s ease !important;
+}
+
+.loaded .loading-screen {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+</style>
 </body>
 </html>
