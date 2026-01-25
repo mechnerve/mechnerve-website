@@ -14,23 +14,47 @@ function initLoadingScreen() {
     const loadingScreen = document.querySelector('.loading-screen');
     if (!loadingScreen) return;
     
-    // Hide loading screen after page loads
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            loadingScreen.style.opacity = '0';
-            loadingScreen.style.visibility = 'hidden';
-            
-            // Start animations after loading
-            setTimeout(() => {
-                document.querySelectorAll('.fade-in').forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('visible');
-                    }, index * 100);
-                });
-            }, 300);
-        }, 800);
-    });
+    // Show loading screen immediately
+    loadingScreen.style.display = 'flex';
+    
+    // Check if page is already loaded
+    if (document.readyState === 'complete') {
+        hideLoadingScreen();
+    } else {
+        window.addEventListener('load', () => {
+            setTimeout(hideLoadingScreen, 800);
+        });
+    }
+    
+    // Fallback: hide after 5 seconds max
+    setTimeout(hideLoadingScreen, 5000);
 }
+
+function hideLoadingScreen() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (loadingScreen) {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+        
+        // Remove from DOM after animation
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            
+            // Start other animations
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 100);
+            });
+        }, 800);
+    }
+}
+
+// Call this early in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initLoadingScreen(); // Call this FIRST
+    // ... rest of your init functions
+});
 
 // Scroll Animations
 function initScrollAnimations() {
