@@ -528,8 +528,8 @@
 </section>
 
 <!-- Career Application Modal -->
-<div id="careerModal" class="career-modal" style="overflow: hidden;">
-   <div class="career-modal-content" style="max-height: 90vh; overflow-y: auto; background: var(--dark-bg); border: 1px solid rgba(56, 189, 248, 0.2);">
+<div id="careerModal" class="career-modal" onclick="closeCareerForm()">
+   <div class="career-modal-content" onclick="event.stopPropagation()" style="max-height: 90vh; overflow-y: auto; background: var(--dark-bg); border: 1px solid rgba(56, 189, 248, 0.2);">
         <div class="career-modal-header" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(244, 114, 182, 0.9));">
             <h2 style="color: white; margin: 0;">Career Application</h2>
             <button onclick="closeCareerForm()" class="career-close">&times;</button>
