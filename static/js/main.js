@@ -390,3 +390,139 @@ document.addEventListener('DOMContentLoaded', function() {
     
     statNumbers.forEach(stat => observer.observe(stat));
 });
+<script>
+// Career Form Functions
+function openCareerForm() {
+    document.getElementById('careerModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeCareerForm() {
+    document.getElementById('careerModal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restore scrolling
+    document.getElementById('careerForm').reset();
+    hideSuccessMessage();
+}
+
+// Close modal when clicking outside
+document.getElementById('careerModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeCareerForm();
+    }
+});
+
+// Form submission handler
+document.getElementById('careerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('careerName').value;
+    const email = document.getElementById('careerEmail').value;
+    const phone = document.getElementById('careerPhone').value;
+    const role = document.getElementById('careerRole').value;
+    const message = document.getElementById('careerMessage').value;
+    
+    // Get file info
+    const resumeInput = document.getElementById('careerResume');
+    const resumeFile = resumeInput.files[0];
+    const fileName = resumeFile ? resumeFile.name : 'No file selected';
+    
+    // Create email content
+    const subject = `Career Application: ${name} for ${role}`;
+    let body = `NEW CAREER APPLICATION\n\n`;
+    body += `Applicant: ${name}\n`;
+    body += `Email: ${email}\n`;
+    body += `Phone: ${phone}\n`;
+    body += `Position: ${role}\n\n`;
+    body += `Cover Letter:\n${message}\n\n`;
+    body += `Resume: ${fileName}\n`;
+    body += `Submitted: ${new Date().toLocaleString()}`;
+    
+    // Create mailto link
+    const mailtoLink = `mailto:mechnervesolutions@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Show file attachment reminder
+    if (resumeFile) {
+        alert(`Please note:\n\n1. An email draft will open in your email client\n2. Please MANUALLY attach your resume file: "${fileName}"\n3. Review the email and click "Send"`);
+    } else {
+        alert('Important: Please attach your resume file in the email draft before sending.');
+    }
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
+    showSuccessMessage();
+    
+    // Close form after delay
+    setTimeout(() => {
+        closeCareerForm();
+    }, 4000);
+});
+
+// Success message
+function showSuccessMessage() {
+    const form = document.getElementById('careerForm');
+    form.style.display = 'none';
+    
+    const successDiv = document.createElement('div');
+    successDiv.innerHTML = `
+        <div style="text-align: center; padding: 3rem 2rem;">
+            <div style="width: 80px; height: 80px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; border: 2px solid var(--accent);">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="color: var(--accent);">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h3 style="color: var(--accent); margin-bottom: 1rem;">Application Submitted!</h3>
+            <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                Your application has been prepared. Please check your email client to send.
+            </p>
+            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                Returning to form in 3 seconds...
+            </p>
+        </div>
+    `;
+    
+    document.querySelector('.career-modal-body').appendChild(successDiv);
+}
+
+function hideSuccessMessage() {
+    const form = document.getElementById('careerForm');
+    form.style.display = 'block';
+    
+    const successDiv = document.querySelector('.career-modal-body > div:last-child');
+    if (successDiv && !successDiv.classList.contains('career-form')) {
+        successDiv.remove();
+    }
+}
+
+// File upload styling
+document.getElementById('careerResume').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const uploadDiv = this.parentElement;
+    const textDiv = uploadDiv.querySelector('.career-file-text');
+    
+    if (file) {
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        
+        if (file.size > maxSize) {
+            alert('File size exceeds 5MB limit. Please choose a smaller file.');
+            this.value = '';
+            textDiv.textContent = 'Upload your Resume/CV';
+            return;
+        }
+        
+        // Update text to show filename
+        textDiv.innerHTML = `<strong>${file.name}</strong> (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+        uploadDiv.style.borderColor = 'var(--accent)';
+        uploadDiv.style.background = 'rgba(16, 185, 129, 0.05)';
+    }
+});
+
+// Press ESC to close modal
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('careerModal').style.display === 'flex') {
+        closeCareerForm();
+    }
+});
+</script>
