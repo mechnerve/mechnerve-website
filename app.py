@@ -1,3 +1,4 @@
+from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, jsonify, make_response
 import os
 import smtplib
@@ -13,6 +14,12 @@ load_dotenv()
 
 
 app = Flask(__name__)
+UPLOAD_FOLDER = "uploads"
+ALLOWED_EXTENSIONS = {"pdf", "doc", "docx"}
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -26,6 +33,9 @@ def add_security_headers(response):
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     return response
+    
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # CORS for API
 def add_cors_headers(response):
@@ -94,7 +104,92 @@ def send_email_via_smtp(data):
         msg['To'] = receiver_email
         msg['Reply-To'] = email
         msg['X-Priority'] = '1'  # High priority
-        
+
+        @app.route("/api/career", methods=["POST"])
+def career_api():
+    try:
+        # 1️⃣ Read form fields
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        phone = request.form.get("phone", "").strip()
+        role = request.form.get("role", "").strip()
+        message = request.form.get("message", "").strip()
+        resume = request.files.get("resume")
+
+        # 2️⃣ Validate required fields
+        if not all([name, email, phone, role, message, resume]):
+            return jsonify({
+                "success": False,
+                "message": "All fields are required"
+            }), 400
+
+        # 3️⃣ Validate resume file
+        if not allowed_file(resume.filename):
+            return jsonify({
+                "success": False,
+                "message": "Resume must be PDF, DOC, or DOCX"
+            }), 400
+
+        # 4️⃣ Save resume temporarily
+        filename = secure_filename(resume.filename)
+        filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+        resume.save(filepath)
+
+        # 5️⃣ Prepare email
+        sender = os.environ["SENDER_EMAIL"]
+        receiver = os.environ["RECEIVER_EMAIL"]
+        password = os.environ["EMAIL_PASSWORD"]
+
+        msg = MIMEMultipart()
+        msg["Subject"] = f"📄 Career Application – {role}"
+        msg["From"] = f"MechNerve Careers <{sender}>"
+        msg["To"] = receiver
+        msg["Reply-To"] = email
+
+        body = f"""
+New Career Application – MechNerve Solutions
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Position Applied: {role}
+
+Cover Letter:
+{message}
+        """
+
+        msg.attach(MIMEText(body, "plain"))
+
+        # 6️⃣ Attach resume
+        with open(filepath, "rb") as f:
+            attachment = MIMEText(f.read(), "base64")
+            attachment.add_header(
+                "Content-Disposition",
+                f'attachment; filename="{filename}"'
+            )
+            msg.attach(attachment)
+
+        # 7️⃣ Send email
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender, password)
+            server.send_message(msg)
+
+        # 8️⃣ Cleanup uploaded file
+        os.remove(filepath)
+
+        return jsonify({
+            "success": True,
+            "message": "✅ Application submitted successfully. We’ll contact you soon."
+        })
+
+    except Exception as e:
+        logger.error(str(e))
+        return jsonify({
+            "success": False,
+            "message": "Server error while submitting application"
+        }), 500
+
         # Plain text version
         text = f"""
 🔔 NEW CONTACT FORM SUBMISSION - MechNerve Solutions
@@ -462,5 +557,6 @@ if __name__ == "__main__":
         logger.info("For Gmail, use App Password (not your regular password)")
     
     app.run(debug=True, host='0.0.0.0', port=port)
+
 
 
