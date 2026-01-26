@@ -529,7 +529,7 @@
 
 <!-- Career Application Modal -->
 <div id="careerModal" class="career-modal" onclick="closeCareerForm()">
-   <div class="career-modal-content" onclick="event.stopPropagation()" style="max-height: 90vh; overflow-y: auto; background: var(--dark-bg); border: 1px solid rgba(56, 189, 248, 0.2);">
+   <div class="career-modal-content" onclick="event.stopPropagation()" style="max-height: 90vh; overflow-y: auto; background: var(--dark-bg);">
         <div class="career-modal-header" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(244, 114, 182, 0.9));">
             <h2 style="color: white; margin: 0;">Career Application</h2>
             <button onclick="closeCareerForm()" class="career-close">&times;</button>
@@ -537,9 +537,10 @@
         
         <div class="career-modal-body">
            <form id="careerForm"
-      class="career-form"
-      enctype="multipart/form-data"
-      style="background: rgba(30, 41, 59, 0.3); padding: 2rem; border-radius: 10px;">
+               class="career-form"
+               method="post"
+               enctype="multipart/form-data"
+               style="background: rgba(30, 41, 59, 0.3); padding: 2rem; border-radius: 10px;">
 
                 <!-- Personal Information -->
                 <div class="form-section" style="margin-bottom: 2.5rem;">
@@ -725,13 +726,15 @@
 }
 
 .career-file-input {
-    position: absolute !important;
+    position: absolute;
     inset: 0;
     opacity: 0;
     cursor: pointer;
     z-index: 1;
 }
-
+                .career-file-upload {
+    pointer-events: auto;
+}
 .career-modal-header,
 .career-modal-body,
 .career-form-group,
