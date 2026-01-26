@@ -57,6 +57,7 @@ def send_email(subject, body, reply_to=None, attachment_path=None):
 
         msg.attach(MIMEText(body, "plain"))
 
+        # Attach file ONLY if present
         if attachment_path:
             part = MIMEBase("application", "octet-stream")
             with open(attachment_path, "rb") as f:
@@ -67,16 +68,19 @@ def send_email(subject, body, reply_to=None, attachment_path=None):
                 f'attachment; filename="{os.path.basename(attachment_path)}"'
             )
             msg.attach(part)
-            with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
-                server.starttls()
-                server.login(sender, password)
-                server.send_message(msg)
+
+        # 🔥 SMTP MUST BE OUTSIDE attachment block
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
+            server.starttls()
+            server.login(sender, password)
+            server.send_message(msg)
 
         return True
 
     except Exception:
         logger.error(traceback.format_exc())
         return False
+
 
 # ==================================================
 # PAGES
@@ -250,5 +254,6 @@ def health():
 # ==================================================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+
 
 
