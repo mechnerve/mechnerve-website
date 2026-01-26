@@ -214,39 +214,54 @@
             <button onclick="closeCollaborationForm()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;">&times;</button>
         </div>
         
-       <form id="collabForm"
-      style="display: flex; flex-direction: column; gap: 1.2rem;">
+       <form id="collabForm" style="display: flex; flex-direction: column; gap: 1.2rem;">
 
-            <div>
-                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #444;">Full Name *</label>
-                <input type="text" id="collabName" name="name" required 
-                       style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
-            </div>
-            
-            <div>
-                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #444;">Email Address *</label>
-                <input type="email" id="collabEmail" name="email" required 
-                       style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
-            </div>
-            
-            <div>
-                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #444;">Phone Number *</label>
-                <input type="tel" id="collabPhone" name="phone" required 
-                       style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box;">
-            </div>
-            
-            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <button type="button" onclick="closeCollaborationForm()" 
-                        style="flex: 1; padding: 1rem; background: #f5f5f5; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; color: #333;">
-                    Cancel
-                </button>
-                <button type="submit" 
-                        style="flex: 1; padding: 1rem; background: linear-gradient(135deg, rgba(56, 189, 248, 1), rgba(244, 114, 182, 1)); border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; color: white; font-weight: 500;">
-                    Submit
-                </button>
-            </div>
-        </form>
-        
+    <div>
+        <label style="display:block;margin-bottom:0.5rem;font-weight:500;color:#444;">
+            Full Name *
+        </label>
+        <input type="text" name="name" required
+               style="width:100%;padding:0.8rem;border:1px solid #ddd;border-radius:8px;">
+    </div>
+
+    <div>
+        <label style="display:block;margin-bottom:0.5rem;font-weight:500;color:#444;">
+            Email Address *
+        </label>
+        <input type="email" name="email" required
+               style="width:100%;padding:0.8rem;border:1px solid #ddd;border-radius:8px;">
+    </div>
+
+    <div>
+        <label style="display:block;margin-bottom:0.5rem;font-weight:500;color:#444;">
+            Phone Number *
+        </label>
+        <input type="tel" name="phone" required
+               style="width:100%;padding:0.8rem;border:1px solid #ddd;border-radius:8px;">
+    </div>
+
+    <div>
+        <label style="display:block;margin-bottom:0.5rem;font-weight:500;color:#444;">
+            Message *
+        </label>
+        <textarea name="message" required rows="4"
+                  placeholder="Tell us about your collaboration idea..."
+                  style="width:100%;padding:0.8rem;border:1px solid #ddd;border-radius:8px;resize:vertical;">
+        </textarea>
+    </div>
+
+    <div style="display:flex;gap:1rem;margin-top:1rem;">
+        <button type="button" onclick="closeCollaborationForm()"
+                style="flex:1;padding:1rem;background:#f5f5f5;border:none;border-radius:8px;">
+            Cancel
+        </button>
+        <button type="submit"
+                style="flex:1;padding:1rem;background:linear-gradient(135deg,#38bdf8,#f472b6);border:none;border-radius:8px;color:white;">
+            Submit
+        </button>
+    </div>
+
+</form>
         <div id="successMessage" style="display: none; text-align: center; padding: 2rem; color: #10b981;">
             <div style="font-size: 3rem; margin-bottom: 1rem;">✓</div>
             <h3 style="margin-bottom: 0.5rem;">Thank You!</h3>
