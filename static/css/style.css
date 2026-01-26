@@ -1476,6 +1476,7 @@ footer {
 
 /* File Upload */
 .career-file-upload {
+    position: relative;
     border: 2px dashed rgba(56, 189, 248, 0.3);
     border-radius: 10px;
     padding: 2.5rem 2rem;
