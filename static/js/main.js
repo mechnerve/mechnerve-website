@@ -42,7 +42,7 @@ function initLoadingScreen() {
         // Enable body scrolling
         document.body.style.overflow = 'visible';
         document.documentElement.style.overflow = 'visible';
-        
+        document.body.classList.add('loaded');
         // Trigger fade-in animations
         triggerFadeInAnimations();
     }, 300);
@@ -178,7 +178,7 @@ function initContactForm() {
         btn.innerHTML = '<span class="loading-spinner"></span> Sending...';
 
         try {
-            const res = await fetch('/api/contact', {
+           const res = await fetch(window.location.origin + '/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
