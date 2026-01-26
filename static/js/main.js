@@ -161,14 +161,13 @@ function initContactForm() {
         e.preventDefault();
 
         const data = {
-            name: contactForm.name.value.trim(),
-            email: contactForm.email.value.trim(),
-            company: contactForm.company.value.trim(),
-            service: contactForm.service.value,
-            message: contactForm.message.value.trim(),
-            subject: 'New Contact Form Submission'
-        };
-
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    company: document.getElementById('company').value.trim(),
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value.trim(),
+    subject: 'Contact Form'
+};
         if (!data.name || !data.email || !data.service || !data.message) {
             showMessage('All required fields must be filled', 'error');
             return;
@@ -267,13 +266,20 @@ function initCollaborationForm() {
 
         const fd = new FormData(collabForm);
         const btn = collabForm.querySelector('button[type="submit"]');
+        const messageInput = collabForm.querySelector('[name="message"]');
+if (!messageInput || !messageInput.value.trim()) {
+    alert('Please enter a message');
+    btn.disabled = false;
+    btn.innerText = 'Submit';
+    return;
+}
         btn.disabled = true;
         btn.innerText = 'Submitting...';
 
         try {
             const res = await fetch('/api/collaboration', { method: 'POST', body: fd });
             const data = await res.json();
-            alert(data.message);
+            showToast(data.message, data.success ? 'success' : 'error');
             if (data.success) {
                 collabForm.reset();
                 closeCollaborationForm();
@@ -308,8 +314,7 @@ function initCareerForm() {
             });
 
             const data = await res.json();
-            alert(data.message);
-
+           showToast(data.message, data.success ? 'success' : 'error');
             if (data.success) {
                 careerForm.reset();
                 closeCareerForm();
@@ -327,14 +332,13 @@ function initCareerForm() {
 // ========== MODALS ==========
 function openCareerForm() {
     document.getElementById('careerModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
 }
 
 function closeCareerForm() {
     document.getElementById('careerModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    document.body.classList.remove('modal-open');
 }
-
 function openCollaborationForm() {
     document.getElementById('collaborationModal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -343,4 +347,29 @@ function openCollaborationForm() {
 function closeCollaborationForm() {
     document.getElementById('collaborationModal').style.display = 'none';
     document.body.style.overflow = 'auto';
+}
+function showToast(message, type = 'success') {
+    let toast = document.createElement('div');
+    toast.textContent = message;
+
+    toast.style.position = 'fixed';
+    toast.style.bottom = '30px';
+    toast.style.right = '30px';
+    toast.style.padding = '14px 20px';
+    toast.style.borderRadius = '8px';
+    toast.style.color = '#fff';
+    toast.style.fontSize = '14px';
+    toast.style.zIndex = '9999';
+    toast.style.background = type === 'success' ? '#10b981' : '#ef4444';
+    toast.style.boxShadow = '0 10px 30px rgba(0,0,0,.2)';
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity .3s';
+
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.style.opacity = '1');
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
 }
