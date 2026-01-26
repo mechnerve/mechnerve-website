@@ -8,7 +8,8 @@ from email import encoders
 from datetime import datetime
 from dotenv import load_dotenv
 
-load_dotenv()
+if os.getenv("RENDER") is None:
+    load_dotenv()
 
 # ==================================================
 # APP CONFIG
@@ -66,11 +67,10 @@ def send_email(subject, body, reply_to=None, attachment_path=None):
                 f'attachment; filename="{os.path.basename(attachment_path)}"'
             )
             msg.attach(part)
-
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
-            server.login(sender, password)
-            server.send_message(msg)
+            with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
+                server.starttls()
+                server.login(sender, password)
+                server.send_message(msg)
 
         return True
 
@@ -125,14 +125,15 @@ Message:
 {message}
 """
 
-        send_email(
-            subject="📩 New Contact Form",
-            body=body,
-            reply_to=email
+        sent = send_email(
+    subject="📩 New Contact Form",
+    body=body,
+    reply_to=email
         )
-
+        if not sent:
+            return jsonify(success=False, message="Email service unavailable"), 500
+            
         return jsonify(success=True, message="✅ Message sent successfully")
-
     except Exception:
         logger.error(traceback.format_exc())
         return jsonify(success=False, message="Server error"), 500
@@ -249,4 +250,5 @@ def health():
 # ==================================================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+
 
