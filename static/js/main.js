@@ -26,10 +26,7 @@ function initLoadingScreen() {
         return;
     }
     
-    // Immediately enable scrolling on body
-    document.body.style.overflow = 'auto';
-    document.body.style.position = 'static';
-    
+   
     // Hide loading screen immediately
     loadingScreen.style.opacity = '0';
     loadingScreen.style.visibility = 'hidden';
@@ -39,10 +36,7 @@ function initLoadingScreen() {
         loadingScreen.style.display = 'none';
         console.log('✅ Loading screen removed');
         
-        // Enable body scrolling
-        document.body.style.overflow = 'visible';
-        document.documentElement.style.overflow = 'visible';
-        document.body.classList.add('loaded');
+      
         // Trigger fade-in animations
         triggerFadeInAnimations();
     }, 300);
