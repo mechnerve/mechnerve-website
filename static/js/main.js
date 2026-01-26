@@ -341,12 +341,12 @@ function closeCareerForm() {
 }
 function openCollaborationForm() {
     document.getElementById('collaborationModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
 }
 
 function closeCollaborationForm() {
     document.getElementById('collaborationModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    document.body.classList.remove('modal-open');
 }
 function showToast(message, type = 'success') {
     let toast = document.createElement('div');
