@@ -103,17 +103,16 @@ def contact_api():
             return jsonify(success=False, message="Invalid request"), 400
 
         data = request.get_json()
-
         name = data.get("name", "").strip()
         email = data.get("email", "").strip()
         service = data.get("service", "General")
         message = data.get("message", "").strip()
 
-        if not all([name, email, message]):
-            return jsonify(success=False, message="All fields required"), 400
-
         if not validate_email(email):
             return jsonify(success=False, message="Invalid email address"), 400
+
+        if not all([name, email, message]):
+            return jsonify(success=False, message="All fields required"), 400
 
         body = f"""
 CONTACT FORM
@@ -126,14 +125,11 @@ Message:
 {message}
 """
 
-        sent = send_email(
+        send_email(
             subject="📩 New Contact Form",
             body=body,
             reply_to=email
         )
-
-        if not sent:
-            return jsonify(success=False, message="Email service unavailable"), 500
 
         return jsonify(success=True, message="✅ Message sent successfully")
 
@@ -253,3 +249,4 @@ def health():
 # ==================================================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+
