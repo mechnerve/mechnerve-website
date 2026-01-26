@@ -183,9 +183,12 @@ function initContactForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
+if (!res.ok) {
+    throw new Error('Server error');
+}
+const result = await res.json();
+showMessage(result.message, result.success ? 'success' : 'error');
 
-            const result = await res.json();
-            showMessage(result.message, result.success ? 'success' : 'error');
             if (result.success) contactForm.reset();
 
         } catch {
@@ -255,8 +258,6 @@ function initHoverEffects() {
     });
 }
 
-// ========== CAREER FORM FUNCTIONS ==========
-// These functions should be in your about.html file
 function initCollaborationForm() {
     const collabForm = document.getElementById('collabForm');
     if (!collabForm) return;
@@ -277,7 +278,10 @@ if (!messageInput || !messageInput.value.trim()) {
         btn.innerText = 'Submitting...';
 
         try {
-            const res = await fetch('/api/collaboration', { method: 'POST', body: fd });
+            const res = await fetch(window.location.origin + '/api/collaboration', {
+    method: 'POST',
+    body: fd
+});
             const data = await res.json();
             showToast(data.message, data.success ? 'success' : 'error');
             if (data.success) {
