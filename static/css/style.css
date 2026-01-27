@@ -1618,3 +1618,16 @@ footer {
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 </style>
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
