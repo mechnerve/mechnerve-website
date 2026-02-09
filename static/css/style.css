@@ -1,5 +1,6 @@
 /* ===== CRITICAL: FIX SCROLLING ===== */
 /* ===== GLOBAL SCROLL FIX ===== */
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
@@ -8,18 +9,12 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background: var(--darker-bg);
+    color: var(--text-light);
     overflow-x: hidden;
-    overflow-y: auto;
-}
-
-/* Lock background only when modal is open */
-body.modal-open {
-    overflow: hidden;
-}
-/* Fix loading screen blocking */
-.loading-screen {
-    z-index: 9999;
-    pointer-events: none; /* Allow clicks through */
 }
 
 
@@ -1630,4 +1625,14 @@ body {
 
 footer {
     margin-top: auto;
+}
+/* 🔒 Lock page scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Ensure modal scrolls internally */
+#careerModal,
+#collaborationModal {
+    overflow-y: auto;
 }
