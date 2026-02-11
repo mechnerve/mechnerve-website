@@ -1652,5 +1652,29 @@ html {
 body {
     -ms-overflow-style: none;
 }
+/* ===== FIX SELECT DROPDOWN DARK THEME ===== */
+
+select {
+    background: rgba(2, 6, 23, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Dropdown options */
+select option {
+    background-color: #0b0f19;  /* dark background */
+    color: #ffffff;            /* white text */
+}
+
+/* When hovering options */
+select option:hover {
+    background-color: #1e293b;
+}
+
+/* When selected */
+select option:checked {
+    background-color: #38bdf8;
+    color: #000;
+}
 
 
