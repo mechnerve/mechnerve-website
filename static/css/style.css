@@ -292,8 +292,9 @@ nav a:hover {
 .hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.25;
     margin-bottom: 1.5rem;
+    padding-bottom: 10px;
     background: linear-gradient(to right, #38bdf8, #f472b6, #10b981);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
