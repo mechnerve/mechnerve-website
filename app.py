@@ -7,6 +7,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 from datetime import datetime
 from dotenv import load_dotenv
+import requests
 
 if os.getenv("RENDER") is None:
     load_dotenv()
@@ -40,40 +41,37 @@ def validate_email(email):
 # ==================================================
 def send_email(subject, body, reply_to=None, attachment_path=None):
     try:
+        api_key = os.getenv("RESEND_API_KEY")
         sender = os.getenv("SENDER_EMAIL")
         receiver = os.getenv("RECEIVER_EMAIL")
-        password = os.getenv("EMAIL_PASSWORD")
 
-        if not all([sender, receiver, password]):
-            logger.error("Email env vars missing")
+        if not all([api_key, sender, receiver]):
+            logger.error("Resend env vars missing")
             return False
 
-        msg = MIMEMultipart()
-        msg["From"] = f"MechNerve Website <{sender}>"
-        msg["To"] = receiver
-        msg["Subject"] = subject
-        if reply_to:
-            msg["Reply-To"] = reply_to
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
 
-        msg.attach(MIMEText(body, "plain"))
+        data = {
+            "from": sender,
+            "to": [receiver],
+            "subject": subject,
+            "text": body,
+            "reply_to": reply_to
+        }
 
-        # Attach file ONLY if present
-        if attachment_path:
-            part = MIMEBase("application", "octet-stream")
-            with open(attachment_path, "rb") as f:
-                part.set_payload(f.read())
-            encoders.encode_base64(part)
-            part.add_header(
-                "Content-Disposition",
-                f'attachment; filename="{os.path.basename(attachment_path)}"'
-            )
-            msg.attach(part)
+        response = requests.post(
+            "https://api.resend.com/emails",
+            headers=headers,
+            json=data,
+            timeout=10
+        )
 
-        # 🔥 SMTP MUST BE OUTSIDE attachment block
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as server:
-            server.starttls()
-            server.login(sender, password)
-            server.send_message(msg)
+        if response.status_code != 200:
+            logger.error(response.text)
+            return False
 
         return True
 
@@ -254,5 +252,6 @@ def health():
 # ==================================================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+
 
 
