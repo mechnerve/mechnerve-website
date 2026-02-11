@@ -373,3 +373,15 @@ function showToast(message, type = 'success') {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+const fileInput = document.querySelector(".career-file-input");
+const fileText = document.querySelector(".career-file-text");
+
+if (fileInput) {
+    fileInput.addEventListener("change", function () {
+        if (this.files.length > 0) {
+            fileText.textContent = this.files[0].name;
+        } else {
+            fileText.textContent = "Upload your Resume/CV";
+        }
+    });
+}
