@@ -1677,4 +1677,16 @@ select option:checked {
     color: #000;
 }
 
+.service-desc {
+    position: relative;
+    padding-left: 22px;
+    margin-top: 8px;
+}
+
+.service-desc::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
 
