@@ -1630,9 +1630,9 @@ footer {
 body.modal-open {
     overflow: hidden;
 }
-
-/* Ensure modal scrolls internally */
-#careerModal,
-#collaborationModal {
+.career-modal-body {
+    max-height: 80vh;
     overflow-y: auto;
 }
+
+
