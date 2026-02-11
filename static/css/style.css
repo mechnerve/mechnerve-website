@@ -1635,5 +1635,22 @@ body.modal-open {
     max-height: 80vh;
     overflow-y: auto;
 }
+ /* ===== HIDE SCROLLBAR BUT KEEP SCROLLING ===== */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+/* Firefox */
+html {
+    scrollbar-width: none;
+}
+
+/* IE */
+body {
+    -ms-overflow-style: none;
+}
 
 
