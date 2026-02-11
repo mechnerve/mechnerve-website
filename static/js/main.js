@@ -1,6 +1,8 @@
 // Main JavaScript for MechNerve Solutions
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM Loaded - Initializing...');
+document.body.classList.add("modal-open");
+document.body.classList.remove("modal-open");
     
     // Initialize all functionality
     initLoadingScreen();
