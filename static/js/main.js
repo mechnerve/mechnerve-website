@@ -385,3 +385,9 @@ if (fileInput) {
         }
     });
 }
+document.getElementById("careerResume").addEventListener("change", function() {
+    const text = document.querySelector(".career-file-text");
+    if (this.files.length > 0) {
+        text.innerText = this.files[0].name;
+    }
+});
