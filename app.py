@@ -8,6 +8,7 @@ from email import encoders
 from datetime import datetime
 from dotenv import load_dotenv
 import requests
+import base64
 
 if os.getenv("RENDER") is None:
     load_dotenv()
@@ -39,7 +40,7 @@ def validate_email(email):
 # ==================================================
 # EMAIL
 # ==================================================
-def send_email(subject, body, reply_to=None, attachment_path=None):
+def send_email(subject, body, reply_to=None, attachment_data=None, attachment_filename=None):
     try:
         api_key = os.getenv("RESEND_API_KEY")
         sender = os.getenv("SENDER_EMAIL")
@@ -61,7 +62,19 @@ def send_email(subject, body, reply_to=None, attachment_path=None):
             "text": body,
             "reply_to": reply_to
         }
+ if reply_to:
+            data["reply_to"] = reply_to
 
+        # 🔥 Attach file properly
+        if attachment_data and attachment_filename:
+            encoded_file = base64.b64encode(attachment_data).decode("utf-8")
+
+            data["attachments"] = [
+                {
+                    "filename": attachment_filename,
+                    "content": encoded_file
+                }
+            ]
         response = requests.post(
             "https://api.resend.com/emails",
             headers=headers,
@@ -178,7 +191,10 @@ Role: {role}
 Message:
 {message}
 """
-
+ # Read file directly (NO saving to disk)
+        file_data = resume.read()
+        filename = secure_filename(resume.filename)
+        
         sent = send_email(
             subject=f"📄 Career Application – {role}",
             body=body,
@@ -253,6 +269,7 @@ def health():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
