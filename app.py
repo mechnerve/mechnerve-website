@@ -199,7 +199,8 @@ Message:
             subject=f"📄 Career Application – {role}",
             body=body,
             reply_to=email,
-            attachment_path=path
+            attachment_data=file_data,
+            attachment_filename=filename
         )
 
         os.remove(path)
@@ -269,6 +270,7 @@ def health():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
