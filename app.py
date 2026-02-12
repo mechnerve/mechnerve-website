@@ -175,10 +175,9 @@ def career_api():
         if not allowed_file(resume.filename):
             return jsonify(success=False, message="Invalid resume file"), 400
 
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"{timestamp}_{secure_filename(resume.filename)}"
-        path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        resume.save(path)
+        # 🔥 Read file directly into memory
+        file_bytes = resume.read()
+        filename = secure_filename(resume.filename)
 
         body = f"""
 CAREER APPLICATION
@@ -191,19 +190,14 @@ Role: {role}
 Message:
 {message}
 """
- # Read file directly (NO saving to disk)
-        file_data = resume.read()
-        filename = secure_filename(resume.filename)
-        
+
         sent = send_email(
             subject=f"📄 Career Application – {role}",
             body=body,
             reply_to=email,
-            attachment_data=file_data,
+            attachment_data=file_bytes,
             attachment_filename=filename
         )
-
-        os.remove(path)
 
         if not sent:
             return jsonify(success=False, message="Email service unavailable"), 500
@@ -213,6 +207,7 @@ Message:
     except Exception:
         logger.error(traceback.format_exc())
         return jsonify(success=False, message="Server error"), 500
+
 
 # ==================================================
 # COLLABORATION API
@@ -270,6 +265,7 @@ def health():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
